@@ -1,0 +1,55 @@
+.navigate-bar {
+    border: 1px solid rgb(20, 19, 19);
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.navigate-element {
+    box-sizing: border-box;
+    border: 2px solid rgb(16, 50, 160);
+    background-color: rgb(70, 111, 245);
+    margin: 10px;
+
+    height: 50px;
+    flex-basis: 150px;
+    flex-grow: 1;
+    border-radius: 10px;
+}
+
+.navigate-element p {
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.word-field form {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    border: 1px solid black;
+
+    border-radius: 10px;
+}
+
+.form-element {
+    display: block;
+    margin: 10px;
+    flex-grow: 1;
+    width: 40%;
+}
+.form-element:nth-last-child(2) {
+    text-align: center;
+}
+
+.form-element:last-child {
+    width: 100%;
+}
+.form-element label {
+    display: block;
+}
+
+.form-element input {
+    width: 100%;
+}
