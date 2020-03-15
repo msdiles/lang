@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import NavigateBar from './NavigateBar'
-import './App.css'
+import './App.scss'
 import WordField from './WordField'
-
+import WordsTable from './WordsTable'
 class App extends Component {
     constructor(props) {
         super(props)
@@ -13,7 +13,7 @@ class App extends Component {
     }
     changeStatus(e) {
       e.preventDefault()
-        const check = e.target.value
+        const check = e.target.name
         console.log(check)
         this.setState({ fieldStatus: check })
     }
@@ -22,6 +22,7 @@ class App extends Component {
             <div className='app'>
                 <NavigateBar changeStatus={this.changeStatus} />
                 <WordField status={this.state.fieldStatus} />
+                <WordsTable/>
             </div>
         )
     }
