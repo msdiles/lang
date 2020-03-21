@@ -1,31 +1,25 @@
-import React, { Component } from 'react'
-import NavigateBar from './NavigateBar'
+import React from 'react'
+import {HashRouter} from 'react-router-dom'
+
 import './App.scss'
-import WordField from './WordField'
-import WordsTable from './WordsTable'
-class App extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            fieldStatus: 'add'
-        }
-        this.changeStatus = this.changeStatus.bind(this)
-    }
-    changeStatus(e) {
-      e.preventDefault()
-        const check = e.target.name
-        console.log(check)
-        this.setState({ fieldStatus: check })
-    }
-    render() {
-        return (
-            <div className='app'>
-                <NavigateBar changeStatus={this.changeStatus} />
-                <WordField status={this.state.fieldStatus} />
-                <WordsTable/>
-            </div>
-        )
-    }
+import { Header } from './Pages/Header'
+import { LeftSidebar } from './Pages/LeftSidebar'
+import { Main } from './Pages/Main'
+import { RightSidebar } from './Pages/RightSidebar'
+import { Footer } from './Pages/Footer'
+
+const App = () => {
+  return (
+    <div className='app'>
+      <HashRouter>
+        <Header />
+        <LeftSidebar />
+        <Main />
+        <RightSidebar />
+        <Footer />
+      </HashRouter>
+    </div>
+  )
 }
 
 export default App
