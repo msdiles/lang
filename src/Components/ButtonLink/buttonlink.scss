@@ -1,11 +1,8 @@
-.button-link {
+.nav-panel .button-link {
+  position: relative;
+  width: 100px;
 
-  width: 8vw;
-  min-width: 60px;
   height: 100%;
-
-  border-right: 1px solid black;
-  
 
   a {
     display: flex;
@@ -15,10 +12,23 @@
     height: 100%;
     width: 100%;
 
-    background-color: rgb(151, 170, 233);
-    color: black;
+    color: rgb(204, 195, 195);
     &:hover {
       font-size: large;
     }
+  }
+}
+.nav-panel .button-link a.active {
+  &::after {
+    content: '';
+    position: absolute;
+
+    top: 45px;
+    height: 5px;
+    width: 70%;
+
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background-color: rgb(180, 172, 172);
   }
 }

@@ -1,10 +1,21 @@
 import React from 'react'
-import NavigatePanel from '../Components/NavigationPanel/NavigationPanel'
+import NavigationPanel from '../Components/NavigationPanel/NavigationPanel'
+import './navigationpanel.scss'
 
 export const Header = () => {
+  const listLinks = [
+    { route: '/home', element: 'Home' },
+    { route: '/about', element: 'About' },
+    { route: '/edit', element: 'Edit' },
+    { route: '/admin', element: 'Admin' }
+  ]
   return (
     <div className='header'>
-      <NavigatePanel/>
+      <NavigationPanel
+        className={'nav-panel'}
+        listLinks={listLinks}
+        isNan={true}
+      />
     </div>
   )
 }

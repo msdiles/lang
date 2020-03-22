@@ -1,26 +1,21 @@
 import React from 'react'
-import './navigatepanel.scss'
 import { ButtonLink } from '../ButtonLink/ButtonLink'
 
-const NavigatePanel = () => {
-  return (
+const NavigationPanel = ({ className, listLinks, isNan }) => {
+  const list = listLinks.map((link, index) => (
+    <li key={index}>
+      <ButtonLink reference={link.route} name={link.element} />
+    </li>
+  ))
+  return isNan === true ? (
     <nav>
-      <ul className='navigate'>
-        <li>
-          <ButtonLink reference='/' name='Home' />
-        </li>
-        <li>
-          <ButtonLink reference='about' name='About' />
-        </li>
-        <li>
-          <ButtonLink reference='edit' name='Edit' />
-        </li>
-        <li>
-          <ButtonLink reference='admin' name='Admin' />
-        </li>
-      </ul>
+      <ul className={`${className}`}>{list}</ul>
     </nav>
+  ) : (
+    <div className={`${className}`}>
+      <ul>{list}</ul>
+    </div>
   )
 }
 
-export default NavigatePanel
+export default NavigationPanel
