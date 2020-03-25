@@ -78,20 +78,28 @@ select {
 }
 ///START
 
+///COLORS VARIABLE
+$color1: #EDC7B7;
+$color2: #EEE2DC;
+$color3: #BAB2B5;
+$color4: #123C69;
+$color5: #AC3B61;
+///
 html {
   height: 100%;
   font-size: vh;
+  
 }
 
 .app {
   display: grid;
   grid-template:
     ' header header header' 100px
-    ' lft-side   main   rgt-side' minmax(1000px, 20fr)
+    ' main   main   main' minmax(1000px, 20fr)
     ' footer footer  footer' 1fr
     / 5% 90% 5%;
 
-  background: rgb(239, 240, 242);
+  background: $color2;
 
   height: 100%;
 }
@@ -100,18 +108,8 @@ html {
   grid-area: header;
 }
 
-.lft-side {
-  grid-area: lft-side;
-}
-
 .main {
   grid-area: main;
-  border: 1px solid black;
-  border-radius: 5px;
-}
-
-.rgt-side {
-  grid-area: rgt-side;
 }
 
 .footer {

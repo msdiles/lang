@@ -1,8 +1,8 @@
 import React from 'react'
 import NavigationPanel from '../../Components/NavigationPanel/NavigationPanel'
 import { Route } from 'react-router-dom'
-import Add from './Add'
-import Find from './Find'
+import Add from './add/Add'
+import Find from './find/Find'
 import EditStart from './EditStart'
 import './edit.scss'
 

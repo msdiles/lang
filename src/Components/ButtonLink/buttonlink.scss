@@ -1,3 +1,11 @@
+///COLORS VARIABLE
+$color1: #edc7b7;
+$color2: #eee2dc;
+$color3: #bab2b5;
+$color4: #123c69;
+$color5: #ac3b61;
+///
+
 .nav-panel .button-link {
   position: relative;
   width: 100px;
@@ -12,7 +20,9 @@
     height: 100%;
     width: 100%;
 
-    color: rgb(204, 195, 195);
+    font-weight: bold;
+
+    color: $color5;
     &:hover {
       font-size: large;
     }
@@ -23,12 +33,12 @@
     content: '';
     position: absolute;
 
-    top: 45px;
+    top: 44px;
     height: 5px;
     width: 70%;
 
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    background-color: rgb(180, 172, 172);
+    background-color: $color4;
   }
 }

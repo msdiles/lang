@@ -1,6 +1,6 @@
 import React from 'react'
-import NavigationPanel from '../Components/NavigationPanel/NavigationPanel'
-import './navigationpanel.scss'
+import NavigationPanel from '../../Components/NavigationPanel/NavigationPanel'
+import './header.scss'
 
 export const Header = () => {
   const listLinks = [

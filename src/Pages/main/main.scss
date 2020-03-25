@@ -1,0 +1,28 @@
+///COLORS VARIABLE
+$color1: #EDC7B7;
+$color2: #EEE2DC;
+$color3: #BAB2B5;
+$color4: #123C69;
+$color5: #AC3B61;
+///
+
+.main {
+  display: grid;
+  grid-template:
+    ' main-lft main-mid main-rgt'
+    / 5% 90% 5%;
+
+
+  & .main-lft {
+    grid-area: main-lft;
+  }
+  & .main-mid {
+    grid-area: main-mid;
+    border: 1px solid $color4;
+    border-radius: 5px;
+  }
+  & .main-rgt {
+    grid-area: main-rgt;
+
+  }
+}

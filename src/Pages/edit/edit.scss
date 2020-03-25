@@ -1,3 +1,11 @@
+///COLORS VARIABLE
+$color1: #EDC7B7;
+$color2: #EEE2DC;
+$color3: #BAB2B5;
+$color4: #123C69;
+$color5: #AC3B61;
+///
+
 .edit {
   height: 100%;
   display: flex;
@@ -31,27 +39,40 @@
 }
 
 div.nav-panel-edit {
-  height: 100%;
-  width: 100px;
-  margin: 0;
-  border-right: 1px solid black;
-  background-color: rgb(163, 82, 55);
+  height: 100px;
+  width: 130px;
+  margin: 5px;
 }
+
 div.nav-panel-edit ul {
   height: 100%;
+  width: 100%;
   margin: 0;
   padding: 0;
 }
+
 div.nav-panel-edit ul li {
-  display: block;
+  list-style-type: none;
   width: 100%;
-  height: 50px;
+  height: 50%;
+  &:first-child a {
+    border: 1px solid $color4;
+    border-bottom: 0.5px solid $color4;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+  }
+  &:last-child a {
+    margin-top: -1px;
+    border: 1px solid $color4;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+  }
 }
 
 .nav-panel-edit .button-link {
   position: relative;
   width: 100%;
-  height: 50px;
+  height: 100%;
 
   a {
     display: flex;
@@ -60,25 +81,28 @@ div.nav-panel-edit ul li {
 
     height: 100%;
     width: 100%;
+    background-color: $color1;
+    color: $color5;
 
-    border-bottom: 1px solid black;
-    color: rgb(204, 195, 195);
+    font-weight: bold;
+
     &:hover {
       font-size: large;
     }
   }
 }
+
 .nav-panel-edit .button-link a.active {
   &::after {
     content: '';
     position: absolute;
-    right: 0;
+    right: 1px;
     top: 15%;
     height: 70%;
     width: 5px;
 
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
-    background-color: rgb(180, 172, 172);
+    background-color: $color4;
   }
 }

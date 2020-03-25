@@ -1,0 +1,21 @@
+///COLORS VARIABLE
+$color1: #EDC7B7;
+$color2: #EEE2DC;
+$color3: #BAB2B5;
+$color4: #123C69;
+$color5: #AC3B61;
+///
+
+input[type='text'] {
+  width: 200px;
+  height: 35px;
+  padding: 5px;
+
+  border: 2px solid $color3;
+  border-radius: 5px;
+  &:focus {
+    outline: none ;
+    border:2px solid rgb(86, 195, 231);
+    border-radius: 5px;
+  }
+}

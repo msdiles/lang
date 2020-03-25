@@ -1,9 +1,18 @@
+///COLORS VARIABLE
+$color1: #EDC7B7;
+$color2: #EEE2DC;
+$color3: #BAB2B5;
+$color4: #123C69;
+$color5: #AC3B61;
+///
+
+
 nav {
   height: 50px;
   width: 100%;
 
-  border-bottom: 1px solid black;
-  background-color: rgb(163, 82, 55);
+  border-bottom: 1px solid $color4;
+  background-color: $color1;
 }
 nav ul.nav-panel {
   height: 100%;
