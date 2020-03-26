@@ -1,10 +1,10 @@
 import React from 'react'
 import NavigationPanel from '../../Components/NavigationPanel/NavigationPanel'
 import { Route } from 'react-router-dom'
-import Add from './add/Add'
-import Find from './find/Find'
 import EditStart from './EditStart'
 import './edit.scss'
+import AddContainer from './add/AddContainer'
+import FindContainer from './find/FindContainer'
 
 const Edit = () => {
   const listLinks = [
@@ -20,8 +20,8 @@ const Edit = () => {
       />
       <div className='edit-main'>
         <Route exact path='/edit' component={EditStart} />
-        <Route path='/edit/add' component={Add} />
-        <Route path='/edit/find' component={Find} />
+        <Route path='/edit/add' component={AddContainer} />
+        <Route path='/edit/find' component={FindContainer} />
       </div>
     </div>
   )

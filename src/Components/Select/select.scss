@@ -1,0 +1,20 @@
+///COLORS VARIABLE
+$color1: #EDC7B7;
+$color2: #EEE2DC;
+$color3: #BAB2B5;
+$color4: #123C69;
+$color5: #AC3B61;
+///
+
+
+.selector{
+
+  & .closed{
+    display:none;
+  }
+  & .toggle-btn{
+    width:50px;
+    height:50px;
+    border:1px solid rgb(86, 195, 231);
+  }
+}

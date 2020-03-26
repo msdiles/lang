@@ -1,38 +1,35 @@
-import React, { Component } from 'react'
+import React from 'react'
 import InputText from '../../../Components/InputText/InputText'
 import Button from '../../../Components/Button/Button'
+import Select from '../../../Components/Select/Select'
 
-class Find extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { word: '' }
-
-    this.handleChange = this.handleChange.bind(this)
-    this.formSubmit = this.formSubmit.bind(this)
-  }
-
-  handleChange(e) {
-    const word = e.target.value
-    this.setState({ word: word })
-  }
-
-  formSubmit(e) {
-    e.preventDefault()
-    console.log(`${this.state.word}`)
-  }
-  render() {
-    return (
+const Find = ({
+  reqWord = '',
+  response = {},
+  handleChange = f => f,
+  handleSubmit = f => f
+}) => {
+  return (
+    <React.Fragment>
       <form>
         <h2>Поиск слова или словосочетания</h2>
         <InputText
           placeholder='Введите слово'
-          value={this.state.word}
-          onChange={this.handleChange}
+          value={reqWord}
+          onChange={handleChange}
         />
-        <Button onClick={this.formSubmit} buttonText={'Поиск'} />
+        <Select option={['english','russian']}/>
+        <Button onClick={handleSubmit} buttonText={'Поиск'} />
       </form>
-    )
-  }
+
+      {response.error && <p>Слово не найдено</p>}
+      {response.english && <ul>{listMaker(response.english)}</ul>}
+    </React.Fragment>
+  )
+}
+
+const listMaker = list => {
+  return list.map((item, index) => <li key={index}>{item}</li>)
 }
 
 export default Find

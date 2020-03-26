@@ -1,0 +1,13 @@
+.edit-add {
+  
+
+  & h2 {
+    grid-area: h2;
+  }
+  & form {
+    grid-area: form;
+  }
+  & .word-table {
+    grid-area: word-table;
+  }
+}

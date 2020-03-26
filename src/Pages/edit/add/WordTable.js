@@ -5,22 +5,22 @@ const WordTable = ({ russian = '', english = [] }) => {
   console.log(english)
   const addedEnglish =
     english !== [] ? (
-      <div>
+      <React.Fragment>
         <p>Перевод:</p>
         <ul>
           {english.map((word, index) => (
             <li key={index}>{word}</li>
           ))}
         </ul>
-      </div>
+      </React.Fragment>
     ) : (
       ''
     )
   return (
-    <React.Fragment>
+    <div className='word-table'>
       {addedRussian}
       {addedEnglish}
-    </React.Fragment>
+    </div>
   )
 }
 
