@@ -1,32 +1,43 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './select.scss'
 
-class Select extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { isClosed: false }
-
-    this.toggleClass = this.toggleClass.bind(this)
-  }
-
-  toggleClass() {
-    const currentState = this.state.isClosed
-    this.setState({ isClosed: !currentState })
-  }
-
-  render() {
-    const { option } = this.props
-    return (
-      <div className='selector'>
-        <div className='toggle-btn' onClick={this.toggleClass}></div>
-        <div className={this.state.isClosed ? 'closed options ' : 'options'}>
-          {option.map((item, index) => (
-            <div key={index}>{item}</div>
-          ))}
-        </div>
+const Select = ({
+  wrapper = '',
+  name = '',
+  options = [],
+  currentOption = '',
+  isClosed = true,
+  focusedOption = 0,
+  handleSelect = f => f,
+  toggleClass = f => f,
+  handleBlur = f => f,
+  handleKey = f => f
+}) => {
+  return (
+    <div
+      className={isClosed ? `closed selector` : `selector`}
+      tabIndex='0'
+      onClick={toggleClass}
+      onKeyDown={handleKey}
+      ref={wrapper}
+    >
+      <p>{currentOption ? currentOption : options[0]}</p>
+      <div className='options' onClick={handleSelect} onBlur={handleBlur}>
+        {options.map((item, index) => (
+          <div
+            onFocus={() => {}}
+            id={index}
+            key={index}
+            data-language={item}
+            data-name={name}
+            tabIndex='0'
+          >
+            {item}
+          </div>
+        ))}
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default Select

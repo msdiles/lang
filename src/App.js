@@ -2,19 +2,17 @@ import React from 'react'
 import { HashRouter } from 'react-router-dom'
 
 import './App.scss'
-import { Header } from './Pages/main/Header'
+
 import { Main } from './Pages/main/Main'
-import { Footer } from './Pages/main/Footer'
+import { MainLayout } from './Pages/main/MainLayout'
 
 const App = () => {
   return (
-    <div className='app'>
-      <HashRouter>
-        <Header />
+    <HashRouter>
+      <MainLayout>
         <Main />
-        <Footer />
-      </HashRouter>
-    </div>
+      </MainLayout>
+    </HashRouter>
   )
 }
 

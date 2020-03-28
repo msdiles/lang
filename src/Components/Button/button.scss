@@ -7,28 +7,28 @@ $color5: #ac3b61;
 ///
 
 button.btn{
-  width-min: 100px;
-  height: 30px;
-  border: 1px solid $color2;
+  min-width:100px;
+  height: 36px;
+  border: 2px solid $color2;
   border-radius: 5px;
   background-color: $color1;
   font-weight: bold;
   text-align: center;
   color: $color5;
   &:hover {
-    border: 1px solid $color3;
+    border: 2px solid $color3;
     background-color: #ecbba8;
     cursor: pointer;
   }
   &:active {
     background-color: #edc7b7;
     outline: none;
-    border: 1px solid rgb(86, 195, 231);
+    border: 2px solid rgb(86, 195, 231);
     border-radius: 5px;
   }
   &:focus {
     outline: none;
-    border: 1px solid rgb(86, 195, 231);
+    border: 2px solid rgb(86, 195, 231);
     border-radius: 5px;
   }
 }

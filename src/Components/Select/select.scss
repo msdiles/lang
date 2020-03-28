@@ -1,20 +1,67 @@
 ///COLORS VARIABLE
-$color1: #EDC7B7;
-$color2: #EEE2DC;
-$color3: #BAB2B5;
-$color4: #123C69;
-$color5: #AC3B61;
+$color1: #edc7b7;
+$color2: #eee2dc;
+$color3: #bab2b5;
+$color4: #123c69;
+$color5: #ac3b61;
 ///
 
-
-.selector{
-
-  & .closed{
-    display:none;
+.selector {
+  position: relative;
+  margin: 10px;
+  padding: 5px;
+  width: 100px;
+  height: 36px;
+  border: 2px solid $color3;
+  border-radius: 5px;
+  background-color: white;
+  &:focus {
+    outline: none;
+    border: 2px solid rgb(86, 195, 231);
+    border-radius: 5px;
   }
-  & .toggle-btn{
-    width:50px;
-    height:50px;
-    border:1px solid rgb(86, 195, 231);
+  &::after {
+    content: '▲';
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    color: $color1;
+  }
+  &.closed .options{
+    display: none;
+  }
+  &.closed::after {
+    content: '▼';
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    color: $color1;
+  }
+  & .options {
+    position: absolute;
+    top: 34px;
+    left: -2px;
+    padding-top: 1px;
+    width: 100px;
+    border: 2px solid $color3;
+border-top: none;
+    border-radius: 5px;
+    background-color: white;
+    & div {
+      margin: 2px;
+      text-align: center;
+
+      &:hover {
+        cursor: pointer;
+        background-color: #ecd4cb;
+      }
+      &:focus {
+        background-color: #f1ccbe;
+        outline: none;
+      }
+      &:active {
+        background-color: #edc7b7;
+      }
+    }
   }
 }
