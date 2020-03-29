@@ -1,66 +1,60 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import Find from './Find'
 
-const options = ['English', 'Russian', 'Germany']
-class FindContainer extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      reqWord: '',
-      response: '',
-      selectedLanguageFrom: '',
-      selectedLanguageTo: ''
-    }
+const FindContainer = () => {
+  const options = ['English', 'Russian', 'Germany']
+  const [requestWord, setRequestWord] = useState('')
+  const [response, setResponse] = useState({})
+  const [translateFrom, setTranslateFrom] = useState(options[0])
+  const [translateTo, setTranslateTo] = useState(options[1])
 
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.selectLanguage = this.selectLanguage.bind(this)
-  }
-
-  handleChange(e) {
+  function handleChange(e) {
     const word = e.target.value
-    this.setState({ reqWord: word })
+    setRequestWord(word)
   }
 
-  selectLanguage(e) {
+  function selectLanguage(e) {
     const { language, name } = e.target.dataset
     if (language && name) {
       if (name === 'from') {
-        this.setState({ selectedLanguageFrom: language })
+        setTranslateFrom(language)
       } else if (name === 'to') {
-        this.setState({ selectedLanguageTo: language })
+        setTranslateTo(language)
       }
     }
   }
 
-  handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault()
+    const language=translateFrom.toLowerCase()
+    console.log(JSON.stringify({ language:language,word:requestWord}))
     fetch('/api/word/read', {
       method: 'POST',
-      body: JSON.stringify({ word: this.state.reqWord }),
+      body: JSON.stringify({ language:language,word:requestWord}),
       headers: {
         'Content-Type': 'application/json'
       }
     })
       .then(response => response.json())
-      .then(result => this.setState({ response: result }))
+      // .then(result => setResponse({ result }))
+      .then(result=>console.log(result))
       .catch(err => console.log(err))
+      console.log(response)
+
   }
 
-  render() {
-    return (
-      <Find
-        reqWord={this.state.reqWord}
-        response={this.state.response}
-        selectedLanguageFrom={this.state.selectedLanguageFrom}
-        selectedLanguageTo={this.state.selectedLanguageTo}
-        options={options}
-        handleChange={this.handleChange}
-        handleSubmit={this.handleSubmit}
-        selectLanguage={this.selectLanguage}
-      />
-    )
-  }
+  return (
+    <Find
+      requestWord={requestWord}
+      response={response}
+      translateFrom={translateFrom}
+      translateTo={translateTo}
+      options={options}
+      handleChange={handleChange}
+      handleSubmit={handleSubmit}
+      selectLanguage={selectLanguage}
+    />
+  )
 }
 
 export default FindContainer

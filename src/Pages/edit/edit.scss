@@ -13,26 +13,26 @@ $color5: #AC3B61;
 
 .edit-main {
   width: 100%;
-  & h2 {
+  h2 {
     text-align: center;
   }
-  & form {
+  form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    & ul {
+    ul {
       list-style: none;
     }
   }
-  & input {
+  input {
     margin: 10px;
     max-width: 200px;
   }
-  & label {
+  label {
     margin: 10px;
     max-width: 200px;
   }
-  & button {
+  button {
     margin: 10px;
     max-width: 250px;
   }

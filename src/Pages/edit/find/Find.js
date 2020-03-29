@@ -5,10 +5,10 @@ import SelectContainer from '../../../Components/Select/SelectContainer'
 import './find.scss'
 
 const Find = ({
-  reqWord = '',
+  requestWord = '',
   response = {},
-  selectedLanguageFrom = '',
-  selectedLanguageTo = '',
+  translateFrom = '',
+  translateTo = '',
   options = [],
   handleChange = f => f,
   handleSubmit = f => f,
@@ -21,25 +21,24 @@ const Find = ({
         <div className='flex-line'>
           <InputText
             placeholder='Введите слово'
-            value={reqWord}
+            value={requestWord}
             onChange={handleChange}
           />
           <SelectContainer
             name={'from'}
-            options={options}
+            options={options.filter((option)=>option!==translateTo)}
             handleSelect={selectLanguage}
-            currentOption={selectedLanguageFrom}
+            currentOption={translateFrom}
           />
           <SelectContainer
             name={'to'}
-            options={options}
+            options={options.filter((option)=>option!==translateFrom)}
             handleSelect={selectLanguage}
-            currentOption={selectedLanguageTo}
+            currentOption={translateTo}
           />
           <Button onClick={handleSubmit} buttonText={'Поиск'} />
         </div>
       </form>
-
       {response.error && <p>Слово не найдено</p>}
       {response.english && <ul>{listMaker(response.english)}</ul>}
     </React.Fragment>

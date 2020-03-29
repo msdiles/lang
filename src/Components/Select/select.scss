@@ -27,7 +27,7 @@ $color5: #ac3b61;
     right: 4px;
     color: $color1;
   }
-  &.closed .options{
+  &.closed .options {
     display: none;
   }
   &.closed::after {
@@ -37,17 +37,17 @@ $color5: #ac3b61;
     right: 4px;
     color: $color1;
   }
-  & .options {
+  .options {
     position: absolute;
     top: 34px;
     left: -2px;
     padding-top: 1px;
     width: 100px;
     border: 2px solid $color3;
-border-top: none;
+    border-top: none;
     border-radius: 5px;
     background-color: white;
-    & div {
+    div {
       margin: 2px;
       text-align: center;
 

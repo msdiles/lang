@@ -2,12 +2,11 @@ import React from 'react'
 import './select.scss'
 
 const Select = ({
-  wrapper = '',
+  selectorRef = '',
   name = '',
   options = [],
   currentOption = '',
   isClosed = true,
-  focusedOption = 0,
   handleSelect = f => f,
   toggleClass = f => f,
   handleBlur = f => f,
@@ -19,7 +18,7 @@ const Select = ({
       tabIndex='0'
       onClick={toggleClass}
       onKeyDown={handleKey}
-      ref={wrapper}
+      ref={selectorRef}
     >
       <p>{currentOption ? currentOption : options[0]}</p>
       <div className='options' onClick={handleSelect} onBlur={handleBlur}>
