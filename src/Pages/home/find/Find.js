@@ -2,7 +2,11 @@ import React from 'react'
 import InputText from '../../../Components/InputText/InputText'
 import Button from '../../../Components/Button/Button'
 import SelectContainer from '../../../Components/Select/SelectContainer'
+
+
 import './find.scss'
+import WordInfo from '../../../Components/WordInfo/WordInfo'
+import ButtonSwap from '../../../Components/ButtonSwap/ButtonSwap'
 
 const Find = ({
   requestWord = '',
@@ -12,7 +16,8 @@ const Find = ({
   options = [],
   handleChange = f => f,
   handleSubmit = f => f,
-  selectLanguage = f => f
+  selectLanguage = f => f,
+  swapLanguage = f => f
 }) => {
   return (
     <React.Fragment>
@@ -26,27 +31,25 @@ const Find = ({
           />
           <SelectContainer
             name={'from'}
-            options={options.filter((option)=>option!==translateTo)}
+            options={options.filter(option => option !== translateTo)}
             handleSelect={selectLanguage}
             currentOption={translateFrom}
           />
+          <ButtonSwap swapLanguage={swapLanguage}/>
+
           <SelectContainer
             name={'to'}
-            options={options.filter((option)=>option!==translateFrom)}
+            options={options.filter(option => option !== translateFrom)}
             handleSelect={selectLanguage}
             currentOption={translateTo}
           />
           <Button onClick={handleSubmit} buttonText={'Поиск'} />
+
         </div>
       </form>
-      {response.error && <p>Слово не найдено</p>}
-      {response.english && <ul>{listMaker(response.english)}</ul>}
+      <WordInfo result={response.result} translateTo={translateTo}/>
     </React.Fragment>
   )
-}
-
-const listMaker = list => {
-  return list.map((item, index) => <li key={index}>{item}</li>)
 }
 
 export default Find

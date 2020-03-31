@@ -1,3 +1,5 @@
+@import './assets/master';
+
 // CSS RULES:{
 //     1. position, left/right/top/bottom, float, clear, z-index
 //     2. width, height, margin, padding
@@ -8,7 +10,7 @@
 
 //CSS ClEAR
 
-/* Указываем box sizing */
+// Указываем box sizing
 *,
 *::before,
 *::after {
@@ -78,13 +80,6 @@ select {
 }
 ///START
 
-///COLORS VARIABLE
-$color1: #EDC7B7;
-$color2: #EEE2DC;
-$color3: #BAB2B5;
-$color4: #123C69;
-$color5: #AC3B61;
-///
 html {
   height: 100%;
   font-size: vh;
@@ -92,11 +87,13 @@ html {
 }
 
 .app {
+  width:90%;
+  margin:0 auto;
   display: grid;
   grid-template:
     ' header header header' 100px
     ' main   main   main' minmax(1000px, 20fr)
-    ' footer footer  footer' 1fr
+    ' footer footer  footer' 100px
     / 5% 90% 5%;
 
   background: $color2;

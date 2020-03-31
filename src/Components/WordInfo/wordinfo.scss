@@ -1,0 +1,17 @@
+@import '../../assets/master';
+
+.find-result{
+  padding:10px;
+  border:2px solid $color3;
+  background-color: white;
+  border-radius: 5px;
+  span.transcription{
+    color:grey;
+  }
+  ul{
+    list-style: none;
+    margin: 0;
+    padding:0;
+  }
+
+}

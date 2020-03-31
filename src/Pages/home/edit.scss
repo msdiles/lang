@@ -1,10 +1,4 @@
-///COLORS VARIABLE
-$color1: #EDC7B7;
-$color2: #EEE2DC;
-$color3: #BAB2B5;
-$color4: #123C69;
-$color5: #AC3B61;
-///
+@import '../../assets/master';
 
 .edit {
   height: 100%;
@@ -12,18 +6,12 @@ $color5: #AC3B61;
 }
 
 .edit-main {
+  padding: 2%;
   width: 100%;
   h2 {
     text-align: center;
   }
-  form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    ul {
-      list-style: none;
-    }
-  }
+
   input {
     margin: 10px;
     max-width: 200px;
@@ -55,6 +43,10 @@ div.nav-panel-edit ul li {
   list-style-type: none;
   width: 100%;
   height: 50%;
+  a {
+    margin-top: -1px;
+    border: 1px solid $color4;
+  }
   &:first-child a {
     border: 1px solid $color4;
     border-bottom: 0.5px solid $color4;

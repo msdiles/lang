@@ -1,10 +1,4 @@
-///COLORS VARIABLE
-$color1: #edc7b7;
-$color2: #eee2dc;
-$color3: #bab2b5;
-$color4: #123c69;
-$color5: #ac3b61;
-///
+@import '../../assets/master';
 
 .selector {
   position: relative;
@@ -17,7 +11,7 @@ $color5: #ac3b61;
   background-color: white;
   &:focus {
     outline: none;
-    border: 2px solid rgb(86, 195, 231);
+    border: 2px solid $color6;
     border-radius: 5px;
   }
   &::after {
@@ -38,6 +32,7 @@ $color5: #ac3b61;
     color: $color1;
   }
   .options {
+    z-index: 10;
     position: absolute;
     top: 34px;
     left: -2px;
@@ -50,17 +45,18 @@ $color5: #ac3b61;
     div {
       margin: 2px;
       text-align: center;
+      border-radius: 5px;
 
       &:hover {
         cursor: pointer;
-        background-color: #ecd4cb;
+        background-color: lighten($color1,10);
       }
       &:focus {
-        background-color: #f1ccbe;
+        background-color: darken($color1,5);
         outline: none;
       }
       &:active {
-        background-color: #edc7b7;
+        background-color:darken($color1,5);
       }
     }
   }

@@ -24,10 +24,14 @@ const FindContainer = () => {
     }
   }
 
-  function handleSubmit(e) {
-    e.preventDefault()
+  function swapLanguage(){
+    const swap = translateFrom
+    setTranslateFrom(translateTo)
+    setTranslateTo(swap)
+  }
+
+  function handleSubmit() {
     const language=translateFrom.toLowerCase()
-    console.log(JSON.stringify({ language:language,word:requestWord}))
     fetch('/api/word/read', {
       method: 'POST',
       body: JSON.stringify({ language:language,word:requestWord}),
@@ -36,11 +40,8 @@ const FindContainer = () => {
       }
     })
       .then(response => response.json())
-      // .then(result => setResponse({ result }))
-      .then(result=>console.log(result))
+      .then(result => setResponse({ result }))
       .catch(err => console.log(err))
-      console.log(response)
-
   }
 
   return (
@@ -53,6 +54,7 @@ const FindContainer = () => {
       handleChange={handleChange}
       handleSubmit={handleSubmit}
       selectLanguage={selectLanguage}
+      swapLanguage={swapLanguage}
     />
   )
 }

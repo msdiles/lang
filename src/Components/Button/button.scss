@@ -1,10 +1,4 @@
-///COLORS VARIABLE
-$color1: #edc7b7;
-$color2: #eee2dc;
-$color3: #bab2b5;
-$color4: #123c69;
-$color5: #ac3b61;
-///
+@import '../../assets/master';
 
 button.btn{
   min-width:100px;
@@ -17,18 +11,18 @@ button.btn{
   color: $color5;
   &:hover {
     border: 2px solid $color3;
-    background-color: #ecbba8;
+    background-color: darken($color1,5);
     cursor: pointer;
   }
   &:active {
-    background-color: #edc7b7;
+    background-color: darken($color1,10);
     outline: none;
-    border: 2px solid rgb(86, 195, 231);
+    border: 2px solid $color6;
     border-radius: 5px;
   }
   &:focus {
     outline: none;
-    border: 2px solid rgb(86, 195, 231);
+    border: 2px solid $color6;
     border-radius: 5px;
   }
 }
