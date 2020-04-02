@@ -5,12 +5,12 @@ import SelectContainer from '../../../Components/Select/SelectContainer'
 
 
 import './find.scss'
-import WordInfo from '../../../Components/WordInfo/WordInfo'
+import WordInfo from '../../../Components/WordInfo'
 import ButtonSwap from '../../../Components/ButtonSwap/ButtonSwap'
 
 const Find = ({
+  result={},
   requestWord = '',
-  response = {},
   translateFrom = '',
   translateTo = '',
   options = [],
@@ -47,7 +47,7 @@ const Find = ({
 
         </div>
       </form>
-      <WordInfo result={response.result} translateTo={translateTo}/>
+      <WordInfo result={result}/>
     </React.Fragment>
   )
 }

@@ -1,7 +1,6 @@
 @import '../../assets/master';
 
 input[type='text'] {
-  width: 200px;
   height: 35px;
   padding: 5px;
 
@@ -11,5 +10,11 @@ input[type='text'] {
     outline: none ;
     border:2px solid $color6;
     border-radius: 5px;
+  }
+  &.default{
+    width: 200px;
+  }
+  &.small{
+    width:100px
   }
 }

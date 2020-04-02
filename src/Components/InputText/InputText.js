@@ -6,16 +6,20 @@ const InputText = ({
   name ='',
   placeholder = '',
   value = '',
-  onChange = f => f
+  onChange = f => f,
+  disabled=false,
+  className='default'
 }) => {
   return (
     <input
+    className={className}
       name={name}
       type='text'
       placeholder={placeholder}
       autoComplete='off'
       value={value}
       onChange={onChange}
+      disabled={disabled}
     ></input>
   )
 }

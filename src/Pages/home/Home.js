@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom'
 import './edit.scss'
 import AddContainer from './add/AddContainer'
 import FindContainer from './find/FindContainer'
-import UpdateContainer from './update/UpdateContainer'
+import UpdateContainer from './update'
 
 const Edit = () => {
   const listLinks = [

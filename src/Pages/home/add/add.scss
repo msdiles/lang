@@ -4,7 +4,13 @@
   h2 {
     text-align: center;
   }
-
+  form {
+    display: block;
+    margin: auto;
+    .btn-swap {
+      transform: rotate(90deg);
+    }
+  }
   input {
     margin: 10px;
     max-width: 200px;

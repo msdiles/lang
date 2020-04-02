@@ -3,51 +3,44 @@ import InputText from '../../../Components/InputText/InputText'
 import Button from '../../../Components/Button/Button'
 import SelectContainer from '../../../Components/Select/SelectContainer'
 import './add.scss'
-import ButtonSwap from '../../../Components/ButtonSwap/ButtonSwap'
-import WordInfo from '../../../Components/WordInfo/WordInfo'
+import WordInfo from '../../../Components/WordInfo'
 
 const Add = ({
   wordFrom = '',
   wordTo = '',
-  addedTo = '',
-  addedFrom = '',
   handleChange = f => f,
   handleAdd = f => f,
   handleClear = f => f,
   handleSubmit = f => f,
-  swapLanguage = f => f,
   options = [],
   languageFrom = '',
   languageTo = '',
   handleSelect = f => f,
-  transcription = ''
+  transcription = '',
+  active = true,
+  response={}
 }) => {
   return (
     <div className='edit-add'>
       <h2>Внесение слова в базу</h2>
       <form>
         <div className='flex-row'>
+          {active ? (
+            <SelectContainer
+              name='from'
+              options={options}
+              currentOption={languageFrom}
+              handleSelect={handleSelect}
+            />
+          ) : (
+            <InputText className='small' value={languageFrom} disabled={true} />
+          )}
           <InputText
             name='wordFrom'
             placeholder='Введите слово'
             value={wordFrom}
             onChange={handleChange}
           />
-          <SelectContainer
-            name={'from'}
-            options={options.filter(option => option !== languageTo)}
-            currentOption={languageFrom}
-            handleSelect={handleSelect}
-          />
-          <ButtonSwap swapLanguage={swapLanguage} />
-          <SelectContainer
-            name={'to'}
-            options={options.filter(option => option !== languageFrom)}
-            currentOption={languageTo}
-            handleSelect={handleSelect}
-          />
-        </div>
-        <div className='flex-row'>
           <InputText
             name='transcription'
             placeholder='Введите транскрипцию'
@@ -56,26 +49,30 @@ const Add = ({
           />
         </div>
         <div className='flex-row'>
+          <SelectContainer
+            name='to'
+            options={options.filter(option => option !== languageFrom)}
+            currentOption={languageTo}
+            handleSelect={handleSelect}
+          />
           <InputText
             name='wordTo'
             placeholder='Перевод'
             value={wordTo}
             onChange={handleChange}
           />
-          <Button buttonText='Добавить вариант перевода' onClick={handleAdd} />
-          <Button buttonText='Очистить' onClick={handleClear} />
+          <Button buttonText='Добавить перевод' onClick={handleAdd} />
         </div>
+        <Button buttonText='Очистить' onClick={handleClear} />
         <Button buttonText='Отправить' onClick={handleSubmit} />
       </form>
 
       <WordInfo
-        display={{
-          existed: wordFrom  ? true : false,
-          response: {
-            word: wordFrom,
-            transcription: transcription,
-            translations: [{ language: languageTo, words: addedTo }]
-          }
+        result={{
+          existed: true,
+          response: response,
+          display: true,
+          action: 'add'
         }}
         translateTo={languageTo}
       />

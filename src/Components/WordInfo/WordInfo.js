@@ -1,55 +1,57 @@
+//TODO change WordInfo for add,find,update
+
 import React from 'react'
 import './wordinfo.scss'
 import Button from '../../Components/Button/Button'
-import { useHistory } from 'react-router-dom'
-//TODO split to container and presentational component
-const FindResult = ({ result = {}, translateTo = '', display = {} }) => {
-  const history = useHistory()
-// FIXME fix handleClick props wordFrom
-  const handleClick = () => {
-    history.push({ pathname: '/home/add', props: { wordFrom: 'asda' } })
+
+const WordInfo = ({ result = {}, handleClick = f => f }) => {
+  // console.log(result)
+  let filteredResult = {}
+  if (result.existed) {
+    try {
+      filteredResult = { ...result }
+      filteredResult.response.translations = [
+        filteredResult.response.translations.filter(
+          item => (item.language = filteredResult.translateTo)
+        )[0]
+      ]
+      filteredResult = false
+    } catch (error) {
+      console.log(error)
+    }
   }
-// TODO change name of display
-  if (display.existed) {
-    result = display
-  }
-  const existed = result.existed ? result.existed : ''
-  let word = ''
-  let transcription = ''
-  let languages = []
-  if (existed) {
-    word = result.response.word
-    transcription = result.response.transcription
-    languages = result.response.translations
-  }
-  return existed ? (
-    <div className='find-result'>
-      <span>Слово: {word} </span>
-      {transcription && (
-        <span className='transcription'>[{transcription}]</span>
-      )}
-      <p>Перевод: </p>
-      <ul>
-        {languages.length > 0 &&
-          languages.filter(item => item.language === translateTo)[0] &&
-          languages.filter(item => item.language === translateTo)[0].words &&
-          languages
-            .filter(item => item.language === translateTo)[0]
-            .words.map((word, index) => (
+  const makeWordSection = info => {
+    return (
+      <div className='find-result'>
+        <span>Слово: {info.response.word} </span>
+        {info.response.transcription && (
+          <span className='transcription'>[{info.response.transcription}]</span>
+        )}
+        <Button buttonText='Изменить' name='update' onClick={handleClick} />
+        <p>Перевод: </p>
+        {info.response.translations.map((element, index) => (
+          <ul key={index}>
+            {element.words.map((word, index) => (
               <li key={index}>
                 {index + 1}. {word}
               </li>
             ))}
-      </ul>
-    </div>
-  ) : Object.keys(result).length > 0 ? (
-    <div className='find-result'>
-      <span>Слово не найдено</span>
-      <Button buttonText='Добавить' onClick={handleClick} />
-    </div>
-  ) : (
-    <p></p>
-  )
+          </ul>
+        ))}
+      </div>
+    )
+  }
+  return <span>Слово: </span>
+  // return result.existed ? (
+  //   makeWordSection(filteredResult)
+  // ) : result.display ? (
+  //   <div className='find-result'>
+  //     <span>Слово не найдено</span>
+  //     <Button buttonText='Добавить' name='add' onClick={handleClick} />
+  //   </div>
+  // ) : (
+  //   <p></p>
+  // )
 }
 
-export default FindResult
+export default WordInfo
