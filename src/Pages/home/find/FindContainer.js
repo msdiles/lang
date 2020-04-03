@@ -11,7 +11,17 @@ const FindContainer = () => {
   const [result, setResult] = useState({})
 
   useEffect(() => {
+    const sortResult = response => {
+      let completedResult = {
+        ...response.result,
+        display: display,
+        action: 'find',
+        translateTo: translateTo
+      }
+      setResult(completedResult)
+    }
     sortResult(response)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [response])
 
   const handleChange = e => {
@@ -51,23 +61,7 @@ const FindContainer = () => {
       .then(setDisplay(true))
       .catch(err => console.log(err))
   }
-  const sortResult = response => {
-    let completedResult ={...response.result,display:display,action:'add',translateTo:translateTo}
-    setResult(completedResult)
-    // console.log(completedResult)
-    // try {
-    //   let filteredResult = { ...result.result }
-    //   filteredResult.response.translations = [
-    //     filteredResult.response.translations.filter(
-    //       item => (item.language = translateTo)
-    //     )[0]
-    //   ]
-    //   filteredResult = { ...filteredResult, display: display }
-    //   setResult(filteredResult)
-    // } catch (error) {
-    //   setResult({ ...result, display: display })
-    // }
-  }
+
   return (
     <Find
       result={result}

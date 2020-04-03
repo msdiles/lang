@@ -13,30 +13,27 @@ const AddContainer = () => {
           wordFrom: location.props.wordFrom
         }
 
-  const options = ['English', 'Russian', 'Germany']
+  const options = ['English', 'Russian', 'Germany', 'Japan', 'Italian']
   const [wordFrom, setWordFrom] = useState(initial.wordFrom)
   const [wordTo, setWordTo] = useState('')
-  const [addedFrom, setAddedFrom] = useState('')
   const [addedTo, setAddedTo] = useState([])
   const [languageFrom, setLanguageFrom] = useState(options[0])
   const [languageTo, setLanguageTo] = useState(options[1])
   const [transcription, setTranscription] = useState('')
-  const [active,setActive] = useState(true)
+  const [active, setActive] = useState(true)
   const [response, setResponse] = useState({
     word: '',
     transcription: '',
-    translations: []
+    translations: ''
   })
 
-  useEffect(()=>{
-    if(wordFrom || transcription ||wordTo || addedFrom ){
+  useEffect(() => {
+    if (wordFrom || transcription || wordTo || addedTo.length) {
       setActive(false)
-    }
-    else{
+    } else {
       setActive(true)
     }
-  })
-
+  }, [transcription, wordFrom, wordTo, addedTo])
 
   const handleChange = e => {
     const { value, name } = e.target
@@ -57,7 +54,8 @@ const AddContainer = () => {
         break
     }
   }
-
+  //TODO add to input onSubmit on enter key
+  //TODO to do handleSubmit
   const handleSubmit = e => {
     e.preventDefault()
     fetch('/api/word/create', {
@@ -65,7 +63,7 @@ const AddContainer = () => {
       body: JSON.stringify({
         language: languageFrom.toLowerCase(),
         add: {
-          word: addedFrom,
+          word: wordTo,
           transcription: 'transcription',
           translations: [{ language: languageTo, words: addedTo }]
         }
@@ -79,56 +77,37 @@ const AddContainer = () => {
       .catch(err => console.log(err))
   }
 
-  // const handleAdd = () => {
-
-  //   const from = wordFrom
-  //   if (wordTo !== '' && !addedTo.includes(wordTo)) {
-  //     const to = wordTo
-  //     setAddedFrom(from)
-  //     setAddedTo([...addedTo, to])
-  //   }
-  // }
-
   const handleAdd = () => {
-    console.log('addedTo: ', addedTo)
-    // if (wordTo !== '' && !addedTo.includes(wordTo)) {
     if (wordTo !== '') {
       const to = wordTo
-      const translations = addedTo
+      let translations = addedTo
       if (translations.length > 0) {
-        let index
+        let index = translations.length
         for (let i = 0; i < translations.length; i++) {
           if (translations[i].language === languageTo) {
             index = i
             break
-          } else {
-            index = translations.length
           }
         }
-        const words = addedTo[index].words.includes(to)
-          ? addedTo[index].words
-          : addedTo[index].words.concat(to)
+        const words = addedTo[index]
+          ? addedTo[index].words.includes(to)
+            ? addedTo[index].words
+            : addedTo[index].words.concat(to)
+          : [to]
         translations[index] = { language: languageTo, words: words }
       } else {
-        translations[0] = { language: languageTo, words: [to] }
+        translations.push({ language: languageTo, words: [to] })
       }
       setAddedTo(translations)
       setResponse({ ...response, translations: translations })
     }
   }
-
+  //BUG handleClear doesn't work with WordInfo
   const handleClear = () => {
     setWordFrom('')
     setWordTo('')
-    setAddedFrom('')
     setAddedTo([])
     setTranscription('')
-  }
-
-  const swapLanguage = () => {
-    const swap = languageFrom
-    setLanguageFrom(languageTo)
-    setLanguageTo(swap)
   }
 
   const selectLanguage = e => {
@@ -138,9 +117,6 @@ const AddContainer = () => {
         setLanguageFrom(language)
       } else if (name === 'to') {
         setLanguageTo(language)
-        if (addedTo.filter(item => item.language === language).length !== 1) {
-          setAddedTo([...addedTo, { language: language, words: [] }])
-        }
       }
     }
   }
@@ -149,13 +125,10 @@ const AddContainer = () => {
     <Add
       wordFrom={wordFrom}
       wordTo={wordTo}
-      addedTo={addedTo}
-      addedFrom={addedFrom}
       handleChange={handleChange}
       handleAdd={handleAdd}
       handleClear={handleClear}
       handleSubmit={handleSubmit}
-      swapLanguage={swapLanguage}
       options={options}
       languageFrom={languageFrom}
       languageTo={languageTo}

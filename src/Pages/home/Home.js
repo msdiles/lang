@@ -5,6 +5,7 @@ import './edit.scss'
 import AddContainer from './add/AddContainer'
 import FindContainer from './find/FindContainer'
 import UpdateContainer from './update'
+import DeleteContainer from './delete'
 
 const Edit = () => {
   const listLinks = [
@@ -24,7 +25,7 @@ const Edit = () => {
         <Route exact path='/home/find' component={FindContainer} />
         <Route path='/home/add' component={AddContainer} />
         <Route path='/home/update' component={UpdateContainer} />
-        <Route path='/home/delete' component={AddContainer} />
+        <Route path='/home/delete' component={DeleteContainer} />
       </div>
     </div>
   )

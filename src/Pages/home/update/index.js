@@ -1,8 +1,8 @@
 import React from 'react'
 import UpdateContainer from './UpdateContainer'
 
-const WordInfo = (props) => {
+const update = (props) => {
   return (<UpdateContainer {...props}/> )
 }
 
-export default WordInfo
+export default update

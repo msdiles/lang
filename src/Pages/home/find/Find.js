@@ -19,6 +19,7 @@ const Find = ({
   selectLanguage = f => f,
   swapLanguage = f => f
 }) => {
+  console.log('add result : ',result)
   return (
     <React.Fragment>
       <h2>Поиск слова или словосочетания</h2>
@@ -47,7 +48,7 @@ const Find = ({
 
         </div>
       </form>
-      <WordInfo result={result}/>
+      <WordInfo result={result} translateTo={translateTo}/>
     </React.Fragment>
   )
 }
