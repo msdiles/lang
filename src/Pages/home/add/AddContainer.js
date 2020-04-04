@@ -3,28 +3,31 @@ import Add from './Add'
 import { useLocation } from 'react-router-dom'
 
 const AddContainer = () => {
+  const options = ['English', 'Russian', 'Germany', 'Japan', 'Italian']
   const location = useLocation()
   const initial =
     typeof location.props === 'undefined'
       ? {
-          wordFrom: ''
+          wordFrom: '',
+          translateFrom:options[0]
         }
       : {
-          wordFrom: location.props.wordFrom
+          wordFrom: location.props.word,
+          translateFrom:location.props.translateFrom
         }
 
-  const options = ['English', 'Russian', 'Germany', 'Japan', 'Italian']
+
   const [wordFrom, setWordFrom] = useState(initial.wordFrom)
   const [wordTo, setWordTo] = useState('')
   const [addedTo, setAddedTo] = useState([])
-  const [languageFrom, setLanguageFrom] = useState(options[0])
-  const [languageTo, setLanguageTo] = useState(options[1])
+  const [languageFrom, setLanguageFrom] = useState(initial.translateFrom)
+  const [languageTo, setLanguageTo] = useState(options.filter(item=>item===languageFrom)[1])
   const [transcription, setTranscription] = useState('')
   const [active, setActive] = useState(true)
   const [response, setResponse] = useState({
     word: '',
     transcription: '',
-    translations: ''
+    translations: '',
   })
 
   useEffect(() => {
@@ -35,7 +38,7 @@ const AddContainer = () => {
     }
   }, [transcription, wordFrom, wordTo, addedTo])
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     const { value, name } = e.target
     switch (name) {
       case 'wordFrom':
@@ -54,9 +57,8 @@ const AddContainer = () => {
         break
     }
   }
-  //TODO add to input onSubmit on enter key
   //TODO to do handleSubmit
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault()
     fetch('/api/word/create', {
       method: 'POST',
@@ -65,16 +67,16 @@ const AddContainer = () => {
         add: {
           word: wordTo,
           transcription: 'transcription',
-          translations: [{ language: languageTo, words: addedTo }]
-        }
+          translations: [{ language: languageTo, words: addedTo }],
+        },
       }),
       headers: {
-        'Content-Type': 'application/json'
-      }
+        'Content-Type': 'application/json',
+      },
     })
-      .then(response => response.json())
-      .then(result => console.log(result))
-      .catch(err => console.log(err))
+      .then((response) => response.json())
+      .then((result) => console.log(result))
+      .catch((err) => console.log(err))
   }
 
   const handleAdd = () => {
@@ -102,15 +104,19 @@ const AddContainer = () => {
       setResponse({ ...response, translations: translations })
     }
   }
-  //BUG handleClear doesn't work with WordInfo
   const handleClear = () => {
     setWordFrom('')
     setWordTo('')
     setAddedTo([])
     setTranscription('')
+    setResponse({
+      word: '',
+      transcription: '',
+      translations: '',
+    })
   }
 
-  const selectLanguage = e => {
+  const selectLanguage = (e) => {
     const { language, name } = e.target.dataset
     if (language && name) {
       if (name === 'from') {

@@ -8,7 +8,8 @@ const InputText = ({
   value = '',
   onChange = f => f,
   disabled=false,
-  className='default'
+  className='default',
+  handleKeyPress=f=>f
 }) => {
   return (
     <input
@@ -20,6 +21,7 @@ const InputText = ({
       value={value}
       onChange={onChange}
       disabled={disabled}
+      onKeyPress={handleKeyPress}
     ></input>
   )
 }

@@ -1,8 +1,29 @@
 ///COLORS VARIABLE
-$color1: #EDC7B7;
-$color2: #EEE2DC;
-$color3: #BAB2B5;
-$color4: #123C69;
-$color5: #AC3B61;
+$color1: #edc7b7;
+$color2: #eee2dc;
+$color3: #bab2b5;
+$color4: #123c69;
+$color5: #ac3b61;
 $color6: rgb(86, 195, 231);
 ///
+
+.flex-row-start {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.flex-row-center {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.flex-column-start {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}

@@ -31,7 +31,7 @@ const Select = ({
             data-name={name}
             tabIndex='0'
           >
-            {item}
+            {item[0].toUpperCase()+item.slice(1)}
           </div>
         ))}
       </div>

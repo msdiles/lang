@@ -8,23 +8,23 @@ import WordInfo from '../../../Components/WordInfo'
 const Add = ({
   wordFrom = '',
   wordTo = '',
-  handleChange = f => f,
-  handleAdd = f => f,
-  handleClear = f => f,
-  handleSubmit = f => f,
+  handleChange = (f) => f,
+  handleAdd = (f) => f,
+  handleClear = (f) => f,
+  handleSubmit = (f) => f,
   options = [],
   languageFrom = '',
   languageTo = '',
-  handleSelect = f => f,
+  handleSelect = (f) => f,
   transcription = '',
   active = true,
-  response={}
+  response = {},
 }) => {
   return (
     <div className='edit-add'>
-      <h2>Внесение слова в базу</h2>
-      <form>
-        <div className='flex-row'>
+      <h2>Внесение слова или словосочетания в базу</h2>
+      <form id='edit-add-form'>
+        <div className='flex-row-start'>
           {active ? (
             <SelectContainer
               name='from'
@@ -48,10 +48,10 @@ const Add = ({
             onChange={handleChange}
           />
         </div>
-        <div className='flex-row'>
+        <div className='flex-row-start'>
           <SelectContainer
             name='to'
-            options={options.filter(option => option !== languageFrom)}
+            options={options.filter((option) => option !== languageFrom)}
             currentOption={languageTo}
             handleSelect={handleSelect}
           />
@@ -64,7 +64,6 @@ const Add = ({
           <Button buttonText='Добавить перевод' onClick={handleAdd} />
         </div>
         <Button buttonText='Очистить' onClick={handleClear} />
-        <Button buttonText='Отправить' onClick={handleSubmit} />
       </form>
 
       <WordInfo
@@ -72,10 +71,17 @@ const Add = ({
           existed: true,
           response: response,
           display: true,
-          action: 'add'
+          action: 'add',
         }}
         translateTo={languageTo}
       />
+      {(response.word!==''&&response.transcription!==''&&response.translations!=='')&&
+      <div className='flex-row-center'><Button
+        type='submit'
+        buttonText='Отправить'
+        onClick={handleSubmit}
+        form='edit-add-form'
+      /></div>}
     </div>
   )
 }

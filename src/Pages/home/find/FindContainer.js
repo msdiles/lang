@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Find from './Find'
 
 const FindContainer = () => {
-  const options = ['English', 'Russian', 'Germany']
+  const options = ['English', 'Russian', 'Germany', 'Japan', 'Italian']
   const [requestWord, setRequestWord] = useState('')
   const [response, setResponse] = useState({})
   const [translateFrom, setTranslateFrom] = useState(options[0])
@@ -61,7 +61,6 @@ const FindContainer = () => {
       .then(setDisplay(true))
       .catch(err => console.log(err))
   }
-
   return (
     <Find
       result={result}
