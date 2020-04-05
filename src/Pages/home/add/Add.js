@@ -4,22 +4,44 @@ import Button from '../../../Components/Button/Button'
 import SelectContainer from '../../../Components/Select/SelectContainer'
 import './add.scss'
 import WordInfo from '../../../Components/WordInfo'
+import { useAdd } from './useAdd'
+import { useSwapLanguage } from '../../../utils/useSwapLanguage'
+import { useLocation } from 'react-router-dom'
 
-const Add = ({
-  wordFrom = '',
-  wordTo = '',
-  handleChange = (f) => f,
-  handleAdd = (f) => f,
-  handleClear = (f) => f,
-  handleSubmit = (f) => f,
-  options = [],
-  languageFrom = '',
-  languageTo = '',
-  handleSelect = (f) => f,
-  transcription = '',
-  active = true,
-  response = {},
-}) => {
+const Add = () => {
+  const location = useLocation()
+
+  const initial =
+    typeof location.props === 'undefined'
+      ? {
+          wordFrom: '',
+          translateFrom:'',
+          translateTo: '',
+        }
+      : {
+          wordFrom: location.props.word,
+          translateFrom: location.props.translateFrom,
+          translateTo: location.props.translateTo,
+        }
+  const {
+    translateFrom,
+    translateTo,
+    selectLanguage,
+    options,
+  } = useSwapLanguage(initial)
+
+  const {
+    wordFrom,
+    wordTo,
+    handleChange,
+    handleAdd,
+    handleClear,
+    handleSubmit,
+    transcription,
+    active,
+    response,
+  } = useAdd({ translateTo, initial })
+  console.log(initial)
   return (
     <div className='edit-add'>
       <h2>Внесение слова или словосочетания в базу</h2>
@@ -29,11 +51,15 @@ const Add = ({
             <SelectContainer
               name='from'
               options={options}
-              currentOption={languageFrom}
-              handleSelect={handleSelect}
+              currentOption={translateFrom}
+              handleSelect={selectLanguage}
             />
           ) : (
-            <InputText className='small' value={languageFrom} disabled={true} />
+            <InputText
+              className='small'
+              value={translateFrom}
+              disabled={true}
+            />
           )}
           <InputText
             name='wordFrom'
@@ -51,9 +77,11 @@ const Add = ({
         <div className='flex-row-start'>
           <SelectContainer
             name='to'
-            options={options.filter((option) => option !== languageFrom)}
-            currentOption={languageTo}
-            handleSelect={handleSelect}
+            options={options.filter(
+              (option) => option !== translateFrom
+            )}
+            currentOption={translateTo}
+            handleSelect={selectLanguage}
           />
           <InputText
             name='wordTo'
@@ -73,15 +101,20 @@ const Add = ({
           display: true,
           action: 'add',
         }}
-        translateTo={languageTo}
+        translateTo={translateTo}
       />
-      {(response.word!==''&&response.transcription!==''&&response.translations!=='')&&
-      <div className='flex-row-center'><Button
-        type='submit'
-        buttonText='Отправить'
-        onClick={handleSubmit}
-        form='edit-add-form'
-      /></div>}
+      {response.word !== '' &&
+        response.transcription !== '' &&
+        response.translations !== '' && (
+          <div className='flex-row-center'>
+            <Button
+              type='submit'
+              buttonText='Отправить'
+              onClick={handleSubmit}
+              form='edit-add-form'
+            />
+          </div>
+        )}
     </div>
   )
 }

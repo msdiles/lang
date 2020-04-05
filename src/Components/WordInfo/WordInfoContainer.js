@@ -9,7 +9,7 @@ const WordInfoContainer = ({
   result = {},
   translateTo = '',
   requestWord = '',
-  translateFrom=''
+  translateFrom = '',
 }) => {
   const [parameters, setParameters] = useState({})
   useEffect(() => {
@@ -126,7 +126,13 @@ const WordInfoContainer = ({
       case 'add':
         history.push({
           pathname: '/home/add',
-          props: { ...result, action: 'add', word: requestWord ,translateFrom:translateFrom },
+          props: {
+            ...result,
+            action: 'add',
+            word: requestWord,
+            translateFrom: translateFrom,
+            translateTo: translateTo,
+          },
         })
         break
       case 'update':

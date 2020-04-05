@@ -2,26 +2,12 @@ import React, { useState, useEffect } from 'react'
 import Add from './Add'
 import { useLocation } from 'react-router-dom'
 
-const AddContainer = () => {
-  const options = ['English', 'Russian', 'Germany', 'Japan', 'Italian']
-  const location = useLocation()
-  const initial =
-    typeof location.props === 'undefined'
-      ? {
-          wordFrom: '',
-          translateFrom:options[0]
-        }
-      : {
-          wordFrom: location.props.word,
-          translateFrom:location.props.translateFrom
-        }
+export const useAdd = ({translateTo,initial}) => {
 
 
   const [wordFrom, setWordFrom] = useState(initial.wordFrom)
   const [wordTo, setWordTo] = useState('')
   const [addedTo, setAddedTo] = useState([])
-  const [languageFrom, setLanguageFrom] = useState(initial.translateFrom)
-  const [languageTo, setLanguageTo] = useState(options.filter(item=>item===languageFrom)[1])
   const [transcription, setTranscription] = useState('')
   const [active, setActive] = useState(true)
   const [response, setResponse] = useState({
@@ -60,23 +46,24 @@ const AddContainer = () => {
   //TODO to do handleSubmit
   const handleSubmit = (e) => {
     e.preventDefault()
-    fetch('/api/word/create', {
-      method: 'POST',
-      body: JSON.stringify({
-        language: languageFrom.toLowerCase(),
-        add: {
-          word: wordTo,
-          transcription: 'transcription',
-          translations: [{ language: languageTo, words: addedTo }],
-        },
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((response) => response.json())
-      .then((result) => console.log(result))
-      .catch((err) => console.log(err))
+    console.log('added')
+    // fetch('/api/word/create', {
+    //   method: 'POST',
+    //   body: JSON.stringify({
+    //     language: translateFrom.toLowerCase(),
+    //     add: {
+    //       word: wordTo,
+    //       transcription: 'transcription',
+    //       translations: [{ language: translateTo, words: addedTo }],
+    //     },
+    //   }),
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    // })
+    //   .then((response) => response.json())
+    //   .then((result) => console.log(result))
+    //   .catch((err) => console.log(err))
   }
 
   const handleAdd = () => {
@@ -86,7 +73,7 @@ const AddContainer = () => {
       if (translations.length > 0) {
         let index = translations.length
         for (let i = 0; i < translations.length; i++) {
-          if (translations[i].language === languageTo) {
+          if (translations[i].language === translateTo) {
             index = i
             break
           }
@@ -96,9 +83,9 @@ const AddContainer = () => {
             ? addedTo[index].words
             : addedTo[index].words.concat(to)
           : [to]
-        translations[index] = { language: languageTo, words: words }
+        translations[index] = { language: translateTo, words: words }
       } else {
-        translations.push({ language: languageTo, words: [to] })
+        translations.push({ language: translateTo, words: [to] })
       }
       setAddedTo(translations)
       setResponse({ ...response, translations: translations })
@@ -116,34 +103,15 @@ const AddContainer = () => {
     })
   }
 
-  const selectLanguage = (e) => {
-    const { language, name } = e.target.dataset
-    if (language && name) {
-      if (name === 'from') {
-        setLanguageFrom(language)
-      } else if (name === 'to') {
-        setLanguageTo(language)
-      }
-    }
+  return {
+    wordFrom,
+    wordTo,
+    handleChange,
+    handleAdd,
+    handleClear,
+    handleSubmit,
+    transcription,
+    active,
+    response,
   }
-
-  return (
-    <Add
-      wordFrom={wordFrom}
-      wordTo={wordTo}
-      handleChange={handleChange}
-      handleAdd={handleAdd}
-      handleClear={handleClear}
-      handleSubmit={handleSubmit}
-      options={options}
-      languageFrom={languageFrom}
-      languageTo={languageTo}
-      handleSelect={selectLanguage}
-      transcription={transcription}
-      active={active}
-      response={response}
-    />
-  )
 }
-
-export default AddContainer

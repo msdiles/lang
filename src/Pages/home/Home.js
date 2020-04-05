@@ -2,10 +2,10 @@ import React from 'react'
 import NavigationPanel from '../../Components/NavigationPanel/NavigationPanel'
 import { Route } from 'react-router-dom'
 import './edit.scss'
-import AddContainer from './add/AddContainer'
-import FindContainer from './find/FindContainer'
-import UpdateContainer from './update'
-import DeleteContainer from './delete'
+import Add from './add/Add'
+import Find from './find/Find'
+import Update from './update/Update'
+import Delete from './delete/Delete'
 
 const Edit = () => {
   const listLinks = [
@@ -22,10 +22,10 @@ const Edit = () => {
         isNan={false}
       />
       <div className='edit-main'>
-        <Route exact path='/home/find' component={FindContainer} />
-        <Route path='/home/add' component={AddContainer} />
-        <Route path='/home/update' component={UpdateContainer} />
-        <Route path='/home/delete' component={DeleteContainer} />
+        <Route exact path='/home/find' component={Find} />
+        <Route path='/home/add' component={Add} />
+        <Route path='/home/update' component={Update} />
+        <Route path='/home/delete' component={Delete} />
       </div>
     </div>
   )
