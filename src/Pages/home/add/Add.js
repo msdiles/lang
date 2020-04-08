@@ -3,25 +3,29 @@ import InputText from '../../../Components/InputText/InputText'
 import Button from '../../../Components/Button/Button'
 import SelectContainer from '../../../Components/Select/SelectContainer'
 import './add.scss'
-import WordInfo from '../../../Components/WordInfo'
+import WordInfo from '../../../Components/WordInfo/WordInfo'
 import { useAdd } from './useAdd'
 import { useSwapLanguage } from '../../../utils/useSwapLanguage'
 import { useLocation } from 'react-router-dom'
 
 const Add = () => {
+  console.log(`Rendering Add component`)
+
   const location = useLocation()
 
   const initial =
     typeof location.props === 'undefined'
       ? {
-          wordFrom: '',
-          translateFrom:'',
+          word: '',
+          translateFrom: '',
           translateTo: '',
+          redirect: false,
         }
       : {
-          wordFrom: location.props.word,
+          word: location.props.word,
           translateFrom: location.props.translateFrom,
           translateTo: location.props.translateTo,
+          redirect: true,
         }
   const {
     translateFrom,
@@ -39,9 +43,7 @@ const Add = () => {
     handleSubmit,
     transcription,
     active,
-    response,
   } = useAdd({ translateTo, initial })
-  console.log(initial)
   return (
     <div className='edit-add'>
       <h2>Внесение слова или словосочетания в базу</h2>
@@ -77,9 +79,7 @@ const Add = () => {
         <div className='flex-row-start'>
           <SelectContainer
             name='to'
-            options={options.filter(
-              (option) => option !== translateFrom
-            )}
+            options={options.filter((option) => option !== translateFrom)}
             currentOption={translateTo}
             handleSelect={selectLanguage}
           />
@@ -95,17 +95,10 @@ const Add = () => {
       </form>
 
       <WordInfo
-        result={{
-          existed: true,
-          response: response,
-          display: true,
-          action: 'add',
-        }}
         translateTo={translateTo}
+        action='add'
       />
-      {response.word !== '' &&
-        response.transcription !== '' &&
-        response.translations !== '' && (
+      {!active && (
           <div className='flex-row-center'>
             <Button
               type='submit'

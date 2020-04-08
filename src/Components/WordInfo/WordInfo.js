@@ -4,26 +4,49 @@ import React from 'react'
 import './wordinfo.scss'
 import Button from '../../Components/Button/Button'
 import ListOfTranslates from './ListOfTranslates'
+import { useActionChooser } from './useActionChooser'
+import { useRedirect } from './useRedirect'
 
-const WordInfo = ({ result = {}, handleClick = f => f }) => {
-  return result.existed ? (
+const WordInfo = ({
+  action = '',
+  translateTo = '',
+  requestWord = '',
+  translateFrom = '',
+  redirect=false,
+}) => {
+  console.log(`Rendering WordInfo component`)
+  const filteredResult = useActionChooser({ action, translateTo,redirect })
+  const handleClick = useRedirect({
+    translateTo,
+    requestWord,
+    translateFrom,
+  })
+  return filteredResult.existed ? (
     <div className='find-result'>
-      <span>Слово: {result.response.word} </span>
-      {result.response.transcription && (
-        <span className='transcription'>[{result.response.transcription}]</span>
+      <span>Слово: {filteredResult.response.word} </span>
+      {filteredResult.response.transcription && (
+        <span className='transcription'>
+          [{filteredResult.response.transcription}]
+        </span>
       )}
-     { result.action==='find'&& <Button buttonText='Изменить' name='update' onClick={handleClick} />}
-     { result.action==='find'&& <Button buttonText='Удалить' name='delete' onClick={handleClick} />}
-     <ListOfTranslates result={result}/>
+      {action === 'find' && (
+        <Button buttonText='Изменить' name='update' onClick={handleClick} />
+      )}
+      {action === 'find' && (
+        <Button buttonText='Удалить' name='delete' onClick={handleClick} />
+      )}
+      <ListOfTranslates result={filteredResult} />
     </div>
-  ) : result.display ? (
+  ) : filteredResult.display ? (
     <div className='find-result'>
       <span>Слово не найдено</span>
-      <Button buttonText='Добавить' name='add' onClick={handleClick} />
+      {action==='find' && <Button buttonText='Добавить' name='add' onClick={handleClick} />}
     </div>
   ) : (
     <p></p>
   )
 }
+
+
 
 export default WordInfo

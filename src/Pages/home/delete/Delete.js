@@ -2,26 +2,25 @@ import React from 'react'
 import Button from '../../../Components/Button/Button'
 import InputText from '../../../Components/InputText/InputText'
 import SelectContainer from '../../../Components/Select/SelectContainer'
-import WordInfo from '../../../Components/WordInfo'
+import WordInfo from '../../../Components/WordInfo/WordInfo'
 import { useFind } from '../../../utils/useFind'
 import { useSwapLanguage } from '../../../utils/useSwapLanguage'
 import { useLocation } from 'react-router-dom'
 
 const Delete = () => {
+  console.log(`Rendering Delete component`)
+
   const location = useLocation()
-  console.log(location)
   const initial =
     typeof location.props === 'undefined'
-      ? { result: '' }
-      : { result: location.props }
-      console.log(initial.result)
+      ? { redirect: false, requestWord: '' }
+      : { redirect: true, requestWord: location.props.requestWord }
   const { translateFrom, options, selectLanguage } = useSwapLanguage()
   const { result, requestWord, handleSubmit, setRequestWord } = useFind({
     action: 'delete',
     translateFrom: translateFrom,
-    initial
+    initial,
   })
-  console.log(result)
   return (
     <div className='edit-delete'>
       <h2>Удаления слова или словосочетания</h2>
@@ -46,9 +45,10 @@ const Delete = () => {
           />
         </div>
       </form>
-      <WordInfo result={result} />
+      <WordInfo action='delete' redirect={initial.redirect} />
       <div className='flex-row-center'>
-        {result.existed !== undefined && result.existed === true && (
+        {((result.existed !== undefined && result.existed === true) ||
+          initial.redirect === true) && (
           <Button
             name='delete'
             buttonText='Удалить'

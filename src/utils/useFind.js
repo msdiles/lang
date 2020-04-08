@@ -1,57 +1,28 @@
 import { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchAdd } from '../actions/actions'
 
-export const useFind = ({
-  action = '',
-  translateFrom = '',
-  translateTo = '',
-  initial = {},
-}) => {
+export const useFind = ({ action = '', translateFrom = '',initial={} }) => {
+  const requestTypeFromState = useSelector((state) => state.fetch.requestType)
+  const resultFromState = useSelector((state) => state.fetch.currentWord)
   const [requestWord, setRequestWord] = useState(initial.requestWord)
-  const [filteredResponse, setFilteredResponse] = useState(initial.result)
-  const [display, setDisplay] = useState(false)
   const [result, setResult] = useState({})
-
-  const sortResponse = (action, response) => {
-    let completedResult = { ...response, action: action, display: true }
-    if (action === 'find') {
-      completedResult = {
-        ...response,
-        display: display,
-        action: action,
-        translateTo: translateTo,
-      }
-    }
-    if (response.response !== undefined) {
-      completedResult = {
-        ...response,
-        display: display,
-        action: action,
-      }
-    }
-    setFilteredResponse(completedResult)
-  }
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    setResult(filteredResponse)
-  }, [filteredResponse])
+    const data = action === requestTypeFromState ? resultFromState : {}
+    const completedResult = {
+      ...data,
+      action: action,
+    }
+    setResult(completedResult)
+  }, [action, requestTypeFromState, resultFromState])
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    setDisplay(false)
     const language = translateFrom.toLowerCase()
-    fetch('/api/word/read', {
-      method: 'POST',
-      body: JSON.stringify({ language: language, word: requestWord }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((response) => response.json())
-      .then((response) => sortResponse(action, response))
-      .then(setDisplay(true))
-      .catch((err) => console.log(err))
+    dispatch(fetchAdd(requestWord, language, action))
   }
-
   return {
     result,
     requestWord,

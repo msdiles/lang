@@ -2,13 +2,14 @@ import React from 'react'
 import InputText from '../../../Components/InputText/InputText'
 import Button from '../../../Components/Button/Button'
 import SelectContainer from '../../../Components/Select/SelectContainer'
-import WordInfo from '../../../Components/WordInfo'
+import WordInfo from '../../../Components/WordInfo/WordInfo'
 import ButtonSwap from '../../../Components/ButtonSwap/ButtonSwap'
 import './find.scss'
 import { useFind } from '../../../utils/useFind'
 import { useSwapLanguage } from '../../../utils/useSwapLanguage'
 
 const Find = () => {
+  console.log(`Rendering Find component`)
   const {
     translateFrom,
     translateTo,
@@ -16,11 +17,10 @@ const Find = () => {
     selectLanguage,
     swapLanguage,
   } = useSwapLanguage()
-  const { result, requestWord, handleSubmit, setRequestWord } = useFind(
-    {action:'find',
-    translateFrom:translateFrom,
-    translateTo:translateTo}
-  )
+  const { requestWord, handleSubmit, setRequestWord } = useFind({
+    action: 'find',
+    translateFrom: translateFrom,
+  })
   return (
     <React.Fragment>
       <h2>Поиск слова или словосочетания</h2>
@@ -29,7 +29,6 @@ const Find = () => {
           <InputText
             placeholder='Введите слово'
             value={requestWord}
-            // onChange={handleChange}
             onChange={(e) => setRequestWord(e.target.value)}
           />
           <SelectContainer
@@ -50,7 +49,7 @@ const Find = () => {
         </div>
       </form>
       <WordInfo
-        result={result}
+        action='find'
         translateTo={translateTo}
         requestWord={requestWord}
         translateFrom={translateFrom}

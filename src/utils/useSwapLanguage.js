@@ -1,7 +1,6 @@
 import { useState } from 'react'
 
 export const useSwapLanguage = (initial={translateFrom:'',translateTo:''}) => {
-  console.log(initial)
   const options = ['English', 'Russian', 'Germany', 'Japan', 'Italian']
   const [translateFrom, setTranslateFrom] = useState(initial.translateFrom || options[0])
   const [translateTo, setTranslateTo] = useState(initial.translateTo || options[1])
@@ -28,7 +27,5 @@ export const useSwapLanguage = (initial={translateFrom:'',translateTo:''}) => {
     selectLanguage,
     swapLanguage,
     options,
-    setTranslateFrom,
-    setTranslateTo,
   }
 }

@@ -1,28 +1,27 @@
-import React, { useState, useEffect } from 'react'
-import Add from './Add'
-import { useLocation } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { setCurrentWord,changeRequestType } from '../../../actions/actions'
 
-export const useAdd = ({translateTo,initial}) => {
-
-
-  const [wordFrom, setWordFrom] = useState(initial.wordFrom)
+export const useAdd = ({ translateTo, initial }) => {
+  const [wordFrom, setWordFrom] = useState(initial.word)
   const [wordTo, setWordTo] = useState('')
   const [addedTo, setAddedTo] = useState([])
   const [transcription, setTranscription] = useState('')
   const [active, setActive] = useState(true)
   const [response, setResponse] = useState({
-    word: '',
+    word: wordFrom,
     transcription: '',
     translations: '',
   })
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    if (wordFrom || transcription || wordTo || addedTo.length) {
+    if (response.word && response.transcription  && response.translations.length) {
       setActive(false)
     } else {
       setActive(true)
     }
-  }, [transcription, wordFrom, wordTo, addedTo])
+  }, [response])
 
   const handleChange = (e) => {
     const { value, name } = e.target
@@ -91,6 +90,11 @@ export const useAdd = ({translateTo,initial}) => {
       setResponse({ ...response, translations: translations })
     }
   }
+  useEffect(() => {
+    dispatch(setCurrentWord({ response }))
+    dispatch(changeRequestType('add'))
+  }, [dispatch, response])
+
   const handleClear = () => {
     setWordFrom('')
     setWordTo('')
@@ -112,6 +116,5 @@ export const useAdd = ({translateTo,initial}) => {
     handleSubmit,
     transcription,
     active,
-    response,
   }
 }
