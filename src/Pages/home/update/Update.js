@@ -1,12 +1,12 @@
 import React from 'react'
 import Button from '../../../Components/Button/Button'
 import './update.scss'
-import WordInfo from '../../../Components/WordInfo/WordInfo'
 import InputText from '../../../Components/InputText/InputText'
 import SelectContainer from '../../../Components/Select/SelectContainer'
 import { useLocation } from 'react-router-dom'
 import { useSwapLanguage } from '../../../utils/useSwapLanguage'
 import { useFind } from '../../../utils/useFind'
+import { UpdateWordInfo } from './UpdateWordInfo'
 
 const Update = () => {
   console.log(`Rendering Update component`)
@@ -16,13 +16,14 @@ const Update = () => {
     typeof location.props === 'undefined'
       ? { redirect: false, requestWord: '' }
       : { redirect: true, requestWord: location.props.requestWord }
-      
+
   const { translateFrom, options, selectLanguage } = useSwapLanguage()
-  const { result, requestWord, handleSubmit, setRequestWord } = useFind({
+  const { requestWord, handleSubmit, setRequestWord } = useFind({
     action: 'update',
     translateFrom: translateFrom,
     initial,
   })
+
   return (
     <div className='edit-update'>
       <h2>Изменение слова или словосочетания</h2>
@@ -47,17 +48,7 @@ const Update = () => {
           />
         </div>
       </form>
-      <WordInfo action='update' redirect={initial.redirect} />
-      <div className='flex-row-center'>
-        {((result.existed !== undefined && result.existed === true) ||
-          initial.redirect === true) && (
-          <Button
-            name='update'
-            buttonText='Изменить'
-            onClick={() => console.log('updated')}
-          />
-        )}
-      </div>
+      <UpdateWordInfo action='update' redirect={initial.redirect} />
     </div>
   )
 }

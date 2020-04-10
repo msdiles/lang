@@ -13,7 +13,7 @@ export const useActionChooser = ({
   const actionFind = useCallback(
     (data) => {
       let filteredResult = JSON.parse(JSON.stringify(data))
-      if (filteredResult.response) {
+      if (filteredResult.response && filteredResult.response.translations) {
         filteredResult.response.translations = [
           filteredResult.response.translations.filter(
             (item) => item.language === translateTo
@@ -109,6 +109,7 @@ export const useActionChooser = ({
   useEffect(() => {
     const result =
       action === requestTypeFromState || redirect ? resultFromState : {}
+
     const processResult = () => {
       switch (action) {
         case 'find': {

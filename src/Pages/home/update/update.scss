@@ -1,2 +1,18 @@
 @import '../../../assets/master';
 
+.edit-update {
+  .word-info textarea {
+    width: 100%;
+    height: auto;
+    resize: none;
+    overflow: hidden;
+    border-width: 2px;
+    border-radius: 5px;
+    border-color: $color3;
+    &:focus {
+      outline: none;
+      border: 2px solid $color6;
+      border-radius: 5px;
+    }
+  }
+}

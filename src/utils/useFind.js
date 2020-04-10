@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchAdd } from '../actions/actions'
+import { fetchFind } from '../actions/actions'
 
 export const useFind = ({ action = '', translateFrom = '',initial={} }) => {
   const requestTypeFromState = useSelector((state) => state.fetch.requestType)
@@ -21,7 +21,7 @@ export const useFind = ({ action = '', translateFrom = '',initial={} }) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     const language = translateFrom.toLowerCase()
-    dispatch(fetchAdd(requestWord, language, action))
+    dispatch(fetchFind(requestWord, language, action))
   }
   return {
     result,

@@ -1,4 +1,3 @@
-//TODO add Input fot each string ( and p>span,span to li, span,span,SPAN)
 
 import React from 'react'
 import './wordinfo.scss'
@@ -22,7 +21,7 @@ const WordInfo = ({
     translateFrom,
   })
   return filteredResult.existed ? (
-    <div className='find-result'>
+    <div className='word-info'>
       <span>Слово: {filteredResult.response.word} </span>
       {filteredResult.response.transcription && (
         <span className='transcription'>
@@ -38,7 +37,7 @@ const WordInfo = ({
       <ListOfTranslates result={filteredResult} />
     </div>
   ) : filteredResult.display ? (
-    <div className='find-result'>
+    <div className='word-info'>
       <span>Слово не найдено</span>
       {action==='find' && <Button buttonText='Добавить' name='add' onClick={handleClick} />}
     </div>
