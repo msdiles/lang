@@ -2,6 +2,7 @@ import React from 'react'
 import { useActionChooser } from '../../../Components/WordInfo/useActionChooser'
 import Button from '../../../Components/Button/Button'
 import { useUpdateWordInfo } from './useUpdateWordInfo'
+import { useUpdate } from './useUpdate'
 
 export const UpdateWordInfo = ({ action = '', redirect = false }) => {
   console.log(`Rendering UpdateWordInfo component`)
@@ -13,6 +14,14 @@ export const UpdateWordInfo = ({ action = '', redirect = false }) => {
     checked,
     textareaRef,
   } = useUpdateWordInfo({ filteredResult })
+  const { handleSubmitUpdate, isUpdated } = useUpdate()
+  if (isUpdated) {
+    return (
+      <div className='word-info'>
+        <p className='deleted-message'>Обновлено!</p>
+      </div>
+    )
+  }
   return (
     <React.Fragment>
       {filteredResult.response ? (
@@ -51,7 +60,7 @@ export const UpdateWordInfo = ({ action = '', redirect = false }) => {
             <Button
               name='update'
               buttonText='Изменить'
-              onClick={() => console.log('updated')}
+              onClick={handleSubmitUpdate}
             />
           )}
       </div>

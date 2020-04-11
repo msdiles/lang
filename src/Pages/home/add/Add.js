@@ -4,6 +4,7 @@ import Button from '../../../Components/Button/Button'
 import SelectContainer from '../../../Components/Select/SelectContainer'
 import './add.scss'
 import WordInfo from '../../../Components/WordInfo/WordInfo'
+import { useAddForm } from './useAddForm'
 import { useAdd } from './useAdd'
 import { useSwapLanguage } from '../../../utils/useSwapLanguage'
 import { useLocation } from 'react-router-dom'
@@ -40,10 +41,12 @@ const Add = () => {
     handleChange,
     handleAdd,
     handleClear,
-    handleSubmit,
+
     transcription,
     active,
-  } = useAdd({ translateTo, initial })
+  } = useAddForm({ translateTo, translateFrom, initial })
+  const { handleSubmitAdd } = useAdd({ translateFrom })
+
   return (
     <div className='edit-add'>
       <h2>Внесение слова или словосочетания в базу</h2>
@@ -94,20 +97,17 @@ const Add = () => {
         <Button buttonText='Очистить' onClick={handleClear} />
       </form>
 
-      <WordInfo
-        translateTo={translateTo}
-        action='add'
-      />
+      <WordInfo translateTo={translateTo} action='add' />
       {!active && (
-          <div className='flex-row-center'>
-            <Button
-              type='submit'
-              buttonText='Отправить'
-              onClick={handleSubmit}
-              form='edit-add-form'
-            />
-          </div>
-        )}
+        <div className='flex-row-center'>
+          <Button
+            type='submit'
+            buttonText='Отправить'
+            onClick={handleSubmitAdd}
+            form='edit-add-form'
+          />
+        </div>
+      )}
     </div>
   )
 }

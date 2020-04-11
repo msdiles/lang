@@ -6,6 +6,7 @@ import WordInfo from '../../../Components/WordInfo/WordInfo'
 import { useFind } from '../../../utils/useFind'
 import { useSwapLanguage } from '../../../utils/useSwapLanguage'
 import { useLocation } from 'react-router-dom'
+import { useDelete } from './useDelete'
 
 const Delete = () => {
   console.log(`Rendering Delete component`)
@@ -21,6 +22,7 @@ const Delete = () => {
     translateFrom: translateFrom,
     initial,
   })
+  const { handleSubmitDelete } = useDelete()
   return (
     <div className='edit-delete'>
       <h2>Удаления слова или словосочетания</h2>
@@ -52,7 +54,7 @@ const Delete = () => {
           <Button
             name='delete'
             buttonText='Удалить'
-            onClick={() => console.log('delete')}
+            onClick={handleSubmitDelete}
           />
         )}
       </div>

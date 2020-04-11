@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchFind } from '../actions/actions'
+import { fetchFind } from '../actions/findActions'
 
 export const useFind = ({ action = '', translateFrom = '',initial={} }) => {
   const requestTypeFromState = useSelector((state) => state.fetch.requestType)
