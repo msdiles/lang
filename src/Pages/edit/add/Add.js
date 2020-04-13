@@ -5,7 +5,7 @@ import SelectContainer from '../../../Components/Select/SelectContainer'
 import './add.scss'
 import WordInfo from '../../../Components/WordInfo/WordInfo'
 import { useAddForm } from './useAddForm'
-import { useAdd } from './useAdd'
+import { useAdd } from '../../../utils/useAdd'
 import { useSwapLanguage } from '../../../utils/useSwapLanguage'
 import { useLocation } from 'react-router-dom'
 

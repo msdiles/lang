@@ -4,8 +4,8 @@ import Button from '../../Components/Button/Button'
 import ListOfTranslates from './ListOfTranslates'
 import { useActionChooser } from './useActionChooser'
 import { useRedirect } from './useRedirect'
-import { useDelete } from '../../Pages/home/delete/useDelete'
-import { useAdd } from '../../Pages/home/add/useAdd'
+import { useAdd } from '../../utils/useAdd'
+import { useDelete } from '../../utils/useDelete'
 
 const WordInfo = ({
   action = '',

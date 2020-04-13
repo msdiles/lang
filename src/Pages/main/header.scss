@@ -8,13 +8,17 @@ nav {
   background-color: $color1;
 }
 nav ul.nav-panel {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
   height: 100%;
   margin: 0;
-}
-nav ul.nav-panel li {
-  float: left;
 
-  display: block;
-  width: 100px;
-  height: 100%;
+  nav ul.nav-panel li {
+    display: block;
+    height: 100%;
+  }
+  > :last-child {
+    margin-left: auto;
+  }
 }

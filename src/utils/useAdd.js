@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux"
-import {  fetchAdd } from "../../../actions/addActions"
+import {  fetchAdd } from "../actions/addActions"
 
 export const useAdd=({translateFrom=''})=>{
   const currentWordFromState = useSelector((state) => state.fetch.currentWord)

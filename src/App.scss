@@ -83,20 +83,19 @@ select {
 html {
   height: 100%;
   font-size: vh;
-
 }
 
 .app {
-  width:90%;
-  margin:0 auto;
+  width: 90%;
+  margin: 0 auto;
   display: grid;
   grid-template:
-    ' header header header' 100px
-    ' main   main   main' minmax(1000px, 20fr)
-    ' footer footer  footer' 100px
+    ' header header header' minmax(50px, 10vh)
+    ' main   main   main' minmax(500px, 80vh)
+    ' footer footer  footer' minmax(50px, 10vh)
     / 5% 90% 5%;
 
-  background: $color2;
+  background: #ffffff;
 
   height: 100%;
 }
@@ -111,4 +110,64 @@ html {
 
 .footer {
   grid-area: footer;
+}
+
+input {
+  margin: 0.7rem;
+  max-width: 200px;
+}
+label {
+  max-width: 200px;
+}
+button {
+  margin: 0.7rem;
+  max-width: 250px;
+}
+
+input {
+  height: 35px;
+  padding: 5px;
+
+  border: 2px solid $color3;
+  border-radius: 5px;
+  &:focus {
+    outline: none;
+    border: 2px solid $color6;
+    border-radius: 5px;
+  }
+  &.default {
+    width: 200px;
+  }
+  &.small {
+    width: 100px;
+  }
+}
+
+button.btn {
+  min-width: 100px;
+  max-width: 200px;
+  height: 36px;
+  padding: 5px;
+  border: 2px solid $color2;
+  border-radius: 5px;
+  background-color: $color1;
+  font-weight: bold;
+  text-align: center;
+  color: $color5;
+  &:hover {
+    border: 2px solid $color3;
+    background-color: darken($color1, 5);
+    cursor: pointer;
+  }
+  &:active {
+    background-color: darken($color1, 10);
+    outline: none;
+    border: 2px solid $color6;
+    border-radius: 5px;
+  }
+  &:focus {
+    outline: none;
+    border: 2px solid $color6;
+    border-radius: 5px;
+  }
 }

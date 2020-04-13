@@ -1,4 +1,3 @@
-//TODO split and refactor WordInfo
 
 import React, { useEffect, useState } from 'react'
 import './wordinfo.scss'

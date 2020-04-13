@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchDelete } from '../../../actions/deleteActions'
+import { fetchDelete } from '../actions/deleteActions'
 
 export const useDelete = () => {
   const currentWordFormState = useSelector((state) => state.fetch.currentWord)

@@ -1,17 +1,17 @@
 import React from 'react'
-import { Switch, Route, Redirect } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
+import Edit from '../edit/edit'
 import Home from '../home/Home'
-import './main.scss'
+import SignUp from '../signUp/SignUp'
 
 export const Main = () => {
   return (
     <div className='main'>
-      <div className='main-mid'>
-        <Switch>
-          <Route path='/home' component={Home} />
-          <Redirect from='/' to='home/find' />
-        </Switch>
-      </div>
+      <Switch>
+        <Route exact path='/home' component={Home} />
+        <Route path='/edit' component={Edit} />
+        <Route path='/login' component={SignUp} />
+      </Switch>
     </div>
   )
 }

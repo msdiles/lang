@@ -1,34 +1,11 @@
 import React from 'react'
-import NavigationPanel from '../../Components/NavigationPanel/NavigationPanel'
-import { Route } from 'react-router-dom'
-import './edit.scss'
-import Add from './add/Add'
-import Find from './find/Find'
-import Update from './update/Update'
-import Delete from './delete/Delete'
 
-const Edit = () => {
-  const listLinks = [
-    { route: '/home/find', element: 'Find' },
-    { route: '/home/add', element: 'Add' },
-    { route: '/home/update', element: 'Update' },
-    { route: '/home/delete', element: 'Delete' }
-  ]
+const Home = () => {
   return (
-    <div className='edit'>
-      <NavigationPanel
-        listLinks={listLinks}
-        className={'nav-panel-edit'}
-        isNan={false}
-      />
-      <div className='edit-main'>
-        <Route exact path='/home/find' component={Find} />
-        <Route path='/home/add' component={Add} />
-        <Route path='/home/update' component={Update} />
-        <Route path='/home/delete' component={Delete} />
-      </div>
+    <div>
+      <p>Main Page</p>
     </div>
   )
 }
 
-export default Edit
+export default Home

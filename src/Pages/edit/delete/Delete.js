@@ -6,7 +6,7 @@ import WordInfo from '../../../Components/WordInfo/WordInfo'
 import { useFind } from '../../../utils/useFind'
 import { useSwapLanguage } from '../../../utils/useSwapLanguage'
 import { useLocation } from 'react-router-dom'
-import { useDelete } from './useDelete'
+import { useDelete } from '../../../utils/useDelete'
 
 const Delete = () => {
   console.log(`Rendering Delete component`)

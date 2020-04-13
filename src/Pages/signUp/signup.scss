@@ -1,0 +1,19 @@
+@import '../../assets/master';
+
+.login {
+  display: flex;
+  justify-content: center;
+
+  margin: 0 auto;
+  padding: 1rem;
+
+  width: 50%;
+  min-width: 220px;
+
+  background-color: lighten($color2, 5);
+
+  border: 2px solid $color3;
+  border-radius: 10px;
+
+
+}

@@ -7,6 +7,7 @@ $color5: #ac3b61;
 $color6: rgb(86, 195, 231);
 ///
 
+
 .flex-row-start {
   display: flex;
   flex-direction: row;
@@ -23,7 +24,7 @@ $color6: rgb(86, 195, 231);
 
 .flex-column-start {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: flex-start;
   flex-wrap: wrap;
 }

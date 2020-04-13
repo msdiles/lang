@@ -3,25 +3,33 @@ import React from 'react'
 import './inputtext.scss'
 
 const InputText = ({
-  name ='',
+  name = '',
   placeholder = '',
   value = '',
-  onChange = f => f,
-  disabled=false,
-  className='default',
-  handleKeyPress=f=>f
+  onChange = (f) => f,
+  disabled = false,
+  className = 'default',
+  handleKeyPress = (f) => f,
+  id = '',
+  type = 'text',
+  autoCorrect = 'off',
+  autoComplete = 'off',
+  onBlur=f=>f
 }) => {
   return (
     <input
-    className={className}
+      className={className}
       name={name}
-      type='text'
+      id={id}
+      type={type}
+      autoComplete={autoComplete}
+      autoCorrect={autoCorrect}
       placeholder={placeholder}
-      autoComplete='off'
       value={value}
       onChange={onChange}
       disabled={disabled}
       onKeyPress={handleKeyPress}
+      onBlur={onBlur}
     ></input>
   )
 }
