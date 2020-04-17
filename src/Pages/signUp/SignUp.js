@@ -1,13 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Button from '../../Components/Button/Button'
 import './signup.scss'
 import { InputCheck } from '../../Components/InputCheck/InputCheck'
-
+import { PopMessage } from '../../Components/PopMessage/PopMessage'
+import { useHistory } from 'react-router-dom'
+// TODO добавить ограничения по кколичеству симолов 
 const Login = () => {
+  console.log('Rendering SignUp')
+  const history = useHistory()
   const [login, setLogin] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [passwordRepeat, setPasswordRepeat] = useState('')
+  const [isRegister, setIsRegister] = useState('')
   const [loginErrors, setLoginErrors] = useState([
     {
       name: 'isRequired',
@@ -23,8 +28,14 @@ const Login = () => {
       message: 'Это поле обязательно к заполнению.',
     },
     { name: 'isValid', value: false, message: 'Неверный формат.' },
-    { name: 'isTaken', value: false, message: 'Данный адрес почты уже занят.' },
+    {
+      name: 'isTaken',
+      value: false,
+      checkedEmail: '',
+      message: 'Данный адрес почты уже занят.',
+    },
   ])
+
   const [passwordErrors, setPasswordErrors] = useState([
     {
       name: 'isRequired',
@@ -54,6 +65,7 @@ const Login = () => {
         if (item.name === 'isValid') {
           item.value = isValidLogin ? false : true
         }
+
         if (item.name === 'isRequired') {
           item.value = login.length > 0 ? false : true
         }
@@ -68,15 +80,21 @@ const Login = () => {
         ? true
         : false
       let validatedEmail = [...emailErrors]
+      let emailIsValid = false
       validatedEmail = validatedEmail.map((item) => {
         if (item.name === 'isValid') {
           item.value = isValidEmail ? false : true
+          emailIsValid = isValidEmail ? true : false
         }
         if (item.name === 'isRequired') {
           item.value = email.length > 0 ? false : true
         }
-        if (item.name === 'isTaken') {
-          item.value = Math.random() < 0.5 ? true : false
+        if (
+          item.name === 'isTaken' &&
+          item.checkedEmail !== email &&
+          emailIsValid
+        ) {
+          checkEmail()
         }
         return item
       })
@@ -116,14 +134,78 @@ const Login = () => {
     }
   }
 
+  const checkEmail = () => {
+    fetch('/api/profile/email', {
+      method: 'POST',
+      body: JSON.stringify({ email: email }),
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        let { value, checkedEmail } = emailErrors.filter(
+          (item) => item.name === 'isTaken'
+        )
+        if (response.existed === false) {
+          value = false
+          checkedEmail = email
+        }
+        if (response.existed === true) {
+          value = true
+          checkedEmail = email
+        }
+        setEmailErrors([
+          ...emailErrors.filter((item) => item.name !== 'isTaken'),
+          {
+            ...emailErrors.filter((item) => item.name === 'isTaken')[0],
+            value: value,
+            checkedEmail: checkedEmail,
+          },
+        ])
+      })
+      .catch((err) => console.log(err))
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
     validateForm('all')
+    loginErrors.filter((item) => item.value === false).length ===
+      loginErrors.length &&
+      emailErrors.filter((item) => item.value === false).length ===
+        emailErrors.length &&
+      passwordErrors.filter((item) => item.value === false).length ===
+        passwordErrors.length &&
+      passwordRepeatErrors.filter((item) => item.value === false).length ===
+        passwordRepeatErrors.length &&
+      fetch('/api/profile/signup', {
+        method: 'POST',
+        body: JSON.stringify({
+          login: login,
+          email: email,
+          password: password,
+        }),
+        headers: { 'Content-Type': 'application/json' },
+      })
+        .then((response) => response.json())
+        .then((response) => setIsRegister(response))
+        .catch((err) => console.log(err))
   }
 
+  useEffect(() => {
+    if (isRegister.signup === true) {
+      history.push({
+        pathname: '/login',
+        props: { signup: true },
+      })
+    }
+  }, [history, isRegister])
+  //TODO починить респонс с сервер и попо сообщение
   return (
     <div className='login'>
       <div className='flex-column-start'>
+        {(isRegister.signup && isRegister.signup === false)|| (isRegister.errors) ? (
+          <PopMessage message='Упс. Что-то пошло не так. Регистрация пользователя не удалась.' />
+        ) : null}
+
         <InputCheck
           label='Имя'
           idName='name'

@@ -18,24 +18,29 @@ export const InputCheck = ({
   const [checked, setChecked] = useState(false)
 
   useEffect(() => {
-    setIsErrors('')
-    setErrorMessage('')
+    if (errors.length > 0) {
+      setIsErrors('')
+      setErrorMessage('')
+    }
   }, [errors])
 
   useEffect(() => {
-    setIsErrors(errors.filter((item) => item.value === true))
+    if (errors.length > 0) {
+      setIsErrors(errors.filter((item) => item.value === true))
+    }
   }, [errors])
 
   useEffect(() => {
-    for (let i = 0; i < errors.length; i++) {
-      if (errors[i].value === true) {
-        setErrorMessage(<p className='error-message'>{errors[i].message}</p>)
-        setChecked(true)
-        break
+    if (errors.length > 0) {
+      for (let i = 0; i < errors.length; i++) {
+        if (errors[i].value === true) {
+          setErrorMessage(<p className='error-message'>{errors[i].message}</p>)
+          setChecked(true)
+          break
+        }
       }
     }
   }, [errors, value.length])
-
   return (
     <div className='flex-column-start input-block'>
       <label htmlFor={idName}>{label}</label>
@@ -58,9 +63,12 @@ export const InputCheck = ({
         />
         <div
           className={
-            isErrors.length === 0 && value.length > 0 && checked
+            errors.length > 0 &&
+            isErrors.length === 0 &&
+            value.length > 0 &&
+            checked
               ? 'validate-good'
-              : isErrors !== 0 && checked
+              : errors.length > 0 && isErrors !== 0 && checked
               ? 'validate-bad'
               : 'validate-not'
           }

@@ -14,9 +14,11 @@ import {
   FETCH_ADD_FAILURE,
   FETCH_ADD_SUCCESS,
   CLEAR_RESULT,
+  LOGIN_USER,
+  LOG_OUT
 } from '../actions/actionTypes'
 import { combineReducers } from 'redux'
-
+//разделить на отдельные редьюсеры
 const fetchReducer = (
   state = {
     isFetching: false,
@@ -24,6 +26,7 @@ const fetchReducer = (
     requestType: '',
     result: {},
     currentWord: {},
+    user:{}
   },
   action
 ) => {
@@ -78,6 +81,10 @@ const fetchReducer = (
       return { ...state, currentWord: action.response }
     case CLEAR_RESULT:
       return { ...state, result: {} }
+    case LOGIN_USER:
+      return {...state,user:action.user}
+    case LOG_OUT:
+      return {...state,user:{}}
     default:
       return state
   }

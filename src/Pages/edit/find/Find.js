@@ -1,7 +1,7 @@
 import React from 'react'
 import InputText from '../../../Components/InputText/InputText'
 import Button from '../../../Components/Button/Button'
-import SelectContainer from '../../../Components/Select/SelectContainer'
+import Select from '../../../Components/Select/Select'
 import WordInfo from '../../../Components/WordInfo/WordInfo'
 import ButtonSwap from '../../../Components/ButtonSwap/ButtonSwap'
 import './find.scss'
@@ -31,7 +31,7 @@ const Find = () => {
             value={requestWord}
             onChange={(e) => setRequestWord(e.target.value)}
           />
-          <SelectContainer
+          <Select
             name={'from'}
             options={options.filter((option) => option !== translateTo)}
             handleSelect={selectLanguage}
@@ -39,7 +39,7 @@ const Find = () => {
           />
           <ButtonSwap swapLanguage={swapLanguage} />
 
-          <SelectContainer
+          <Select
             name={'to'}
             options={options.filter((option) => option !== translateFrom)}
             handleSelect={selectLanguage}

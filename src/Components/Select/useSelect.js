@@ -1,22 +1,17 @@
-import React, { useState, useRef, useEffect } from 'react'
-import Select from './Select'
+import { useState, useRef, useEffect } from 'react'
 import './select.scss'
 
-const SelectContainer = ({
-  name = '',
-  options = [],
-  handleSelect = f => f,
-  currentOption = 0
-}) => {
+export const useSelect = ({ options = [], handleSelect = (f) => f }) => {
   const [isClosed, setIsClosed] = useState(true)
   const [focusedOption, setFocusedOption] = useState(0)
-  const selectorRef = useRef()
+  const selectorRef = useRef(null)
 
   function handleBlur(e) {
     if (selectorRef.current && !selectorRef.current.contains(e.target)) {
       setIsClosed(true)
     }
   }
+
   useEffect(() => {
     document.addEventListener('mousedown', handleBlur)
     return () => document.removeEventListener('mousedown', handleBlur)
@@ -76,7 +71,7 @@ const SelectContainer = ({
       if (e.target.className !== 'selector') {
         const newOption =
           +e.target.id === options.length - 1 ? 0 : +e.target.id + 1
-        if (+e.target.id ===options.length - 1) {
+        if (+e.target.id === options.length - 1) {
           setIsClosed(!isClosed)
         }
         setFocusedOption(newOption)
@@ -91,19 +86,17 @@ const SelectContainer = ({
     }
   }
 
-  return (
-    <Select
-      selectorRef={selectorRef}
-      name={name}
-      options={options}
-      currentOption={currentOption}
-      isClosed={isClosed}
-      handleSelect={handleSelect}
-      toggleClass={() => setIsClosed(!isClosed)}
-      handleBlur={handleBlur}
-      handleKey={handleKey}
-    />
-  )
-}
+  const toggleClass = () => {
+    setIsClosed(!isClosed)
+  }
 
-export default SelectContainer
+  return {
+    selectorRef,
+    options,
+    isClosed,
+    handleSelect,
+    toggleClass,
+    handleBlur,
+    handleKey,
+  }
+}

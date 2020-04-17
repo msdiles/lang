@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from '../../../Components/Button/Button'
 import InputText from '../../../Components/InputText/InputText'
-import SelectContainer from '../../../Components/Select/SelectContainer'
+import Select from '../../../Components/Select/Select'
 import WordInfo from '../../../Components/WordInfo/WordInfo'
 import { useFind } from '../../../utils/useFind'
 import { useSwapLanguage } from '../../../utils/useSwapLanguage'
@@ -33,7 +33,7 @@ const Delete = () => {
             value={requestWord}
             onChange={(e) => setRequestWord(e.target.value)}
           />
-          <SelectContainer
+          <Select
             name={'from'}
             options={options}
             handleSelect={selectLanguage}

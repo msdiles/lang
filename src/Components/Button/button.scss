@@ -1,26 +1,29 @@
 @import '../../assets/master';
 
-button.btn{
-  min-width:100px;
+button.btn {
+  min-width: 100px;
   max-width: 200px;
   height: 36px;
   padding: 5px;
-  border: 2px solid $color2;
+  border: 2px solid $color1;
   border-radius: 5px;
   background-color: $color1;
   font-weight: bold;
   text-align: center;
   color: $color5;
+  box-shadow:0 8px 15px  rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease 0s;
   &:hover {
     border: 2px solid $color3;
-    background-color: darken($color1,5);
+    background-color: darken($color1, 5);
     cursor: pointer;
   }
   &:active {
-    background-color: darken($color1,10);
+    background-color: darken($color1, 10);
     outline: none;
     border: 2px solid $color6;
     border-radius: 5px;
+    box-shadow:0 8px 15px  rgba(0, 0, 0, 0.1);
   }
   &:focus {
     outline: none;

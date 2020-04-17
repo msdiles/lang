@@ -2,7 +2,7 @@ import React from 'react'
 import Button from '../../../Components/Button/Button'
 import './update.scss'
 import InputText from '../../../Components/InputText/InputText'
-import SelectContainer from '../../../Components/Select/SelectContainer'
+import Select from '../../../Components/Select/Select'
 import { useLocation } from 'react-router-dom'
 import { useSwapLanguage } from '../../../utils/useSwapLanguage'
 import { useFind } from '../../../utils/useFind'
@@ -34,7 +34,7 @@ const Update = () => {
             value={requestWord}
             onChange={(e) => setRequestWord(e.target.value)}
           />
-          <SelectContainer
+          <Select
             name={'from'}
             options={options}
             handleSelect={selectLanguage}

@@ -1,7 +1,6 @@
 @import '../../assets/master';
 
 .login {
-  position: relative;
   display: flex;
   justify-content: center;
 
@@ -15,6 +14,20 @@
 
   border: 2px solid $color3;
   border-radius: 10px;
-
-  
+}
+.input-link {
+  & a:last-child {
+    margin-top:-1.5rem;
+  }
+}
+.link {
+  display: flex;
+  justify-content: center;
+  a {
+    text-decoration: none;
+    color:$color4;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
 }

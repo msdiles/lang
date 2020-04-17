@@ -6,7 +6,6 @@ export const Header = () => {
   const listLinks = [
     { route: '/home', element: 'Home' },
     { route: '/edit', element: 'Edit' },
-    { route: '/login', element: 'Login' }
   ]
   return (
     <div className='header'>

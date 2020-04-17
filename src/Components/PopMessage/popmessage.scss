@@ -1,0 +1,42 @@
+@import '../../assets/master';
+
+.signup-message {
+  padding: 0.4rem;
+  position: absolute;
+  top: 5%;
+  left: 10%;
+  right: 20%;
+  border: 1px solid $color3;
+  border-radius: 5px;
+  background-color: $color2;
+  color: $color5;
+  text-align: center;
+  .close-cross {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    right: 1rem;
+    top: 0;
+    margin-left: 100%;
+    width: 1rem;
+    height: 1rem;
+    opacity: 0.3;
+    &:hover {
+      opacity: 1;
+    }
+    &::before,
+    &::after {
+      position: absolute;
+      content: ' ';
+      height: 1rem;
+      width: 2px;
+      background-color: #333;
+    }
+    &::before {
+      transform: rotate(45deg);
+    }
+    &::after {
+      transform: rotate(-45deg);
+    }
+  }
+}

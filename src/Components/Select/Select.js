@@ -1,17 +1,20 @@
 import React from 'react'
 import './select.scss'
+import { useSelect } from './useSelect'
 
 const Select = ({
-  selectorRef = '',
   name = '',
   options = [],
-  currentOption = '',
-  isClosed = true,
-  handleSelect = f => f,
-  toggleClass = f => f,
-  handleBlur = f => f,
-  handleKey = f => f
+  handleSelect = (f) => f,
+  currentOption = 0,
 }) => {
+  const {
+    selectorRef,
+    isClosed,
+    toggleClass,
+    handleBlur,
+    handleKey,
+  } = useSelect({ options, handleSelect })
   return (
     <div
       className={isClosed ? `closed selector` : `selector`}
@@ -27,11 +30,11 @@ const Select = ({
             onFocus={() => {}}
             id={index}
             key={index}
-            data-language={item}
+            data-value={item}
             data-name={name}
             tabIndex='0'
           >
-            {item[0].toUpperCase()+item.slice(1)}
+            {item[0].toUpperCase() + item.slice(1)}
           </div>
         ))}
       </div>

@@ -15,7 +15,7 @@ export const useRedirect = ({
       case 'add':
         dispatch(changeRequestType('add'))
         history.push({
-          pathname: '/home/add',
+          pathname: '/edit/add',
           props: {
             word: requestWord,
             translateFrom: translateFrom,
@@ -27,14 +27,14 @@ export const useRedirect = ({
       case 'update':
         dispatch(changeRequestType('update'))
         history.push({
-          pathname: '/home/update',
+          pathname: '/edit/update',
           props: { redirect: true, requestWord: requestWord },
         })
         break
       case 'delete':
         dispatch(changeRequestType('delete'))
         history.push({
-          pathname: '/home/delete',
+          pathname: '/edit/delete',
           props: { redirect: true, requestWord: requestWord },
         })
         break

@@ -1,7 +1,7 @@
 import React from 'react'
 import InputText from '../../../Components/InputText/InputText'
 import Button from '../../../Components/Button/Button'
-import SelectContainer from '../../../Components/Select/SelectContainer'
+import Select from '../../../Components/Select/Select'
 import './add.scss'
 import WordInfo from '../../../Components/WordInfo/WordInfo'
 import { useAddForm } from './useAddForm'
@@ -53,7 +53,7 @@ const Add = () => {
       <form id='edit-add-form'>
         <div className='flex-row-start'>
           {active ? (
-            <SelectContainer
+            <Select
               name='from'
               options={options}
               currentOption={translateFrom}
@@ -80,7 +80,7 @@ const Add = () => {
           />
         </div>
         <div className='flex-row-start'>
-          <SelectContainer
+          <Select
             name='to'
             options={options.filter((option) => option !== translateFrom)}
             currentOption={translateTo}

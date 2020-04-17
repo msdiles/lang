@@ -6,12 +6,12 @@ export const useSwapLanguage = (initial={translateFrom:'',translateTo:''}) => {
   const [translateTo, setTranslateTo] = useState(initial.translateTo || options[1])
 
   const selectLanguage = (e) => {
-    const { language, name } = e.target.dataset
-    if (language && name) {
+    const { value, name } = e.target.dataset
+    if (value && name) {
       if (name === 'from') {
-        setTranslateFrom(language)
+        setTranslateFrom(value)
       } else if (name === 'to') {
-        setTranslateTo(language)
+        setTranslateTo(value)
       }
     }
   }

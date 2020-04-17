@@ -1,5 +1,6 @@
 import React from 'react'
 import { ButtonLink } from '../ButtonLink/ButtonLink'
+import { ProfileSelect } from './ProfileSelect'
 
 const NavigationPanel = ({ className, listLinks, isNan }) => {
   const list = listLinks.map((link, index) => (
@@ -9,7 +10,12 @@ const NavigationPanel = ({ className, listLinks, isNan }) => {
   ))
   return isNan === true ? (
     <nav>
-      <ul className={`${className}`}>{list}</ul>
+      <ul className={`${className}`}>
+        {list}
+        <li>
+          <ProfileSelect />
+        </li>
+      </ul>
     </nav>
   ) : (
     <div className={`${className}`}>
