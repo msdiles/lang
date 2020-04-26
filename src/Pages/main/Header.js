@@ -4,8 +4,8 @@ import './header.scss'
 
 export const Header = () => {
   const listLinks = [
-    { route: '/home', element: 'Home' },
-    { route: '/edit', element: 'Edit' },
+    { route: '/home', element: 'Home', permission: 'guest' },
+    { route: '/edit', element: 'Edit', permission: 'admin' },
   ]
   return (
     <div className='header'>

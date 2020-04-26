@@ -1,6 +1,6 @@
 @import '../../assets/master';
 
-.login {
+.module-block {
   position: relative;
   display: flex;
   justify-content: center;
@@ -16,5 +16,45 @@
   border: 2px solid $color3;
   border-radius: 10px;
 
-  
+  .input-block {
+    margin-bottom: 1rem;
+
+    label {
+      margin-left: 1rem;
+      margin-bottom: -0.8rem;
+      font-weight: 600;
+    }
+    .error-message {
+      margin-left: 1rem;
+      margin-top: -0.8rem;
+      font-size: 0.8rem;
+      font-style: italic;
+      margin-bottom: -0.4rem;
+    }
+    .validate-bad {
+      margin: auto;
+    }
+    .validate-good {
+      margin: auto;
+    }
+    .validate-good::after {
+      content: ' \2714';
+      color: white;
+      padding: 0.1rem;
+      background-color: green;
+      border-radius: 50%;
+    }
+    .validate-bad::after {
+      content: '\2718';
+      color: white;
+      padding: 0.1rem;
+      background-color: red;
+      border-radius: 50%;
+    }
+    .validate-not::after {
+      content: '\2718';
+      visibility: hidden;
+      padding: 0.1rem;
+    }
+  }
 }

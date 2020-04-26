@@ -11,13 +11,14 @@ export const InputCheck = ({
   autoComplete = 'off',
   autoCorrect = 'off',
   value = '',
-  setValue = (f) => f,
+  handleChange = (f) => f,
 }) => {
   const [isErrors, setIsErrors] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
   const [checked, setChecked] = useState(false)
 
   useEffect(() => {
+    console.log(errors)
     if (errors.length > 0) {
       setIsErrors('')
       setErrorMessage('')
@@ -53,9 +54,7 @@ export const InputCheck = ({
           autoCorrect={autoCorrect}
           autoComplete={autoComplete}
           value={value}
-          onChange={(e) => {
-            setValue(e.target.value)
-          }}
+          onChange={(e) => handleChange(e)}
           onBlur={(e) => {
             validateForm(e.target.name)
             setChecked(true)

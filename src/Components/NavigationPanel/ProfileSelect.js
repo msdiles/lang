@@ -10,6 +10,15 @@ export const ProfileSelect = () => {
     typeof user.id === 'undefined'
       ? ['register', 'login']
       : ['profile', 'logout']
+  const currentOption =
+    typeof user.id === 'undefined' ? (
+      'Join'
+    ) : (
+      <span className='flex-row-start'>
+        <img src='./img/account_circle-24px.svg'  alt='avatar'></img>
+        <span >{user.username}</span>
+      </span>
+    )
 
   const handleRedirect = (e) => {
     const { value } = e.target.dataset
@@ -38,7 +47,7 @@ export const ProfileSelect = () => {
         name='profile'
         options={options}
         handleSelect={handleRedirect}
-        currentOption={0}
+        currentOption={currentOption}
       />
     </div>
   )

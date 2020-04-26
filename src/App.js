@@ -4,23 +4,27 @@ import { HashRouter } from 'react-router-dom'
 import './App.scss'
 
 import { Main } from './Pages/main/Main'
-import { MainLayout } from './Pages/main/MainLayout'
-import { useDispatch } from 'react-redux'
-import { refreshToken } from './actions/authorizationActions'
+import { useDispatch, useSelector } from 'react-redux'
+import { getUser } from './actions/authorizationActions'
+import LoadingModal from './Components/LoadingModal/LoadingModal'
 
 const App = () => {
-  const dispatch= useDispatch()
-
-  useEffect(()=>{
-    dispatch(refreshToken())
-  },[dispatch])
-
+  console.log('Rendering App')
+  const dispatch = useDispatch()
+  const { loading } = useSelector((state) => state.fetch.user)
+  useEffect(() => {
+    if (!loading) {
+      dispatch(getUser())
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   return (
-    <HashRouter>
-      <MainLayout>
+    <React.Fragment>
+      {loading && <LoadingModal />}
+      <HashRouter>
         <Main />
-      </MainLayout>
-    </HashRouter>
+      </HashRouter>
+    </React.Fragment>
   )
 }
 

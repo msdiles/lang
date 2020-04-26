@@ -1,9 +1,8 @@
 import React from 'react'
 import Button from '../../Components/Button/Button'
-// import './signin.scss'
 import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { logOut } from '../../actions/authorizationActions'
+import { fetchLogOut } from '../../actions/authorizationActions'
 
 export const LogOut = () => {
   const history = useHistory()
@@ -14,26 +13,28 @@ export const LogOut = () => {
       history.goBack()
     }
     if (e.target.name === 'logout') {
-      localStorage.removeItem('token')
-      dispatch(logOut())
+      dispatch(fetchLogOut())
       history.push('/home')
     }
   }
   return (
-    <div className='login'>
-      <div className='flex-column-start'>
-        <Button
-          buttonText='Назад'
-          name='back'
-          type='button'
-          onClick={handleClick}
-        />
-        <Button
-          buttonText='Выйти'
-          name='logout'
-          type='button'
-          onClick={handleClick}
-        />
+    <div className='full-size-page'>
+      <div className='full-size-page-content'>
+        <div className='flex-column-center'>
+        <p>Вы действительно хотите выйти из аккаунта?</p>
+          <Button
+            buttonText='Назад'
+            name='back'
+            type='button'
+            onClick={handleClick}
+          />
+          <Button
+            buttonText='Выйти'
+            name='logout'
+            type='button'
+            onClick={handleClick}
+          />
+        </div>
       </div>
     </div>
   )

@@ -14,19 +14,27 @@ import {
   FETCH_ADD_FAILURE,
   FETCH_ADD_SUCCESS,
   CLEAR_RESULT,
-  LOGIN_USER,
-  LOG_OUT
+  LOG_OUT,
+  FETCH_REQUEST,
+  FETCH_REQUEST_LOADING,
+  FETCH_REQUEST_FAILURE,
+  LOGIN_SUCCESS,
+  LOGIN_LOADING,
+  LOGIN_FAILURE,
 } from '../actions/actionTypes'
 import { combineReducers } from 'redux'
-//разделить на отдельные редьюсеры
+
+//TODO разделить на отдельные редьюсеры
 const fetchReducer = (
   state = {
+    permissions: ['guest', 'user', 'moderator', 'admin'],
     isFetching: false,
     errors: false,
     requestType: '',
     result: {},
     currentWord: {},
-    user:{}
+    user: { loading: false, error: false, startFetching: false, role: 'guest' },
+    response: { isFetching: false, errors: false, result: {} },
   },
   action
 ) => {
@@ -81,10 +89,67 @@ const fetchReducer = (
       return { ...state, currentWord: action.response }
     case CLEAR_RESULT:
       return { ...state, result: {} }
-    case LOGIN_USER:
-      return {...state,user:action.user}
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        user: {
+          loading: false,
+          error: false,
+          ...action.user,
+          startFetching: true,
+        },
+      }
+    case LOGIN_LOADING:
+      return {
+        ...state,
+        user: {
+          loading: true,
+          error: false,
+          startFetching: true,
+          role: 'guest',
+        },
+      }
+    case LOGIN_FAILURE:
+      return {
+        ...state,
+        user: {
+          loading: false,
+          error: true,
+          errors:action.err,
+          startFetching: true,
+          role: 'guest',
+        },
+      }
     case LOG_OUT:
-      return {...state,user:{}}
+      return {
+        ...state,
+        user: {
+          loading: false,
+          error: false,
+          startFetching: true,
+          role: 'guest',
+        },
+      }
+    case FETCH_REQUEST:
+      return {
+        ...state,
+        response: {
+          ...state.response,
+          isFetching: false,
+          errors: false,
+          result: action.result,
+        },
+      }
+    case FETCH_REQUEST_LOADING:
+      return {
+        ...state,
+        response: { ...state.response, isFetching: true, errors: false },
+      }
+    case FETCH_REQUEST_FAILURE:
+      return {
+        ...state,
+        response: { ...state.response, isFetching: false, errors: action.err },
+      }
     default:
       return state
   }
