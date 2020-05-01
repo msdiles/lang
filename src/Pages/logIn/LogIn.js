@@ -1,7 +1,7 @@
 import React from 'react'
 import './login.scss'
 import { InputCheck } from '../../Components/InputCheck/InputCheck'
-import { NavLink, useLocation, useHistory } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
 import { PopMessage } from '../../Components/PopMessage/PopMessage'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchLogIn } from '../../actions/authorizationActions'
@@ -10,7 +10,9 @@ import useInputValidation from '../../utils/useInputValidation'
 const Login = () => {
   console.log('Rendering Login component')
 
-  const { loading, error, errors } = useSelector((state) => state.fetch.user)
+  const { loading, error, errors } = useSelector(
+    (state) => state.authorization.user
+  )
   const {
     email,
     emailErrors,
@@ -18,20 +20,15 @@ const Login = () => {
     passwordErrors,
     validateForm,
     handleChange,
+    checkErrors,
   } = useInputValidation({ checkEmail: false })
-  const location = useLocation()
   const dispatch = useDispatch()
   const history = useHistory()
 
   const handleSubmit = (e) => {
     validateForm('all')
     e.preventDefault()
-    if (
-      emailErrors.filter((item) => item.value === false).length ===
-        emailErrors.length &&
-      passwordErrors.filter((item) => item.value === false).length ===
-        passwordErrors.length
-    ) {
+    if (checkErrors(emailErrors, passwordErrors)) {
       const userData = { email, password }
       dispatch(fetchLogIn(userData))
     }
@@ -43,11 +40,10 @@ const Login = () => {
         <div className='flex-column-center'>
           {error ? (
             <PopMessage
-              message={errors.message ? errors.message : errors.message}
+              message={
+                errors.message && 'Упс. Что-то пошло не так. Повторите попытку.'
+              }
             />
-          ) : null}
-          {location.props && location.props.signup ? (
-            <PopMessage message='Вы успешно зарегистрировались' />
           ) : null}
           <InputCheck
             label='Почта'

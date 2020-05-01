@@ -15,6 +15,7 @@ const ResetRequest = () => {
     emailErrors,
     validateForm,
     handleChange,
+    checkErrors,
   } = useInputValidation({ checkEmail: false })
   const [fetchOptions, setFetchOptions] = useState({
     isLoading: false,
@@ -26,10 +27,7 @@ const ResetRequest = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     validateForm('all')
-    if (
-      emailErrors.filter((item) => item.value === false).length ===
-      emailErrors.length
-    ) {
+    if (checkErrors(emailErrors)) {
       setFetchOptions({ error: false, result: {}, isLoading: true })
       fetch('/api/profile/reset/get/', {
         method: 'POST',
@@ -66,7 +64,7 @@ const ResetRequest = () => {
   console.log(
     fetchOptions.result.success && fetchOptions.result.success === false
   )
-  //TODO добавить класс дизейбл наа все кнопки с запросамим
+
   if (stage === 1)
     return (
       <div className='full-size-page'>

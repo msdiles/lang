@@ -171,3 +171,8 @@ button.btn {
     border-radius: 5px;
   }
 }
+
+button:disabled {
+  color: darken($color: $color5, $amount: 40);
+  opacity: 60%;
+}

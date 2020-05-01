@@ -204,6 +204,17 @@ const useInputValidation = (options) => {
       .catch((err) => console.log(err))
   }
 
+  const checkErrors = (...arrays) => {
+    return arrays
+      .map(
+        (array) =>
+          (array.filter((item) => item.value === false).length ===
+            array.length) ===
+          true
+      )
+      .every((item) => item === true)
+  }
+
   const handleChange = (e) => {
     switch (e.target.name) {
       case 'name':
@@ -243,6 +254,7 @@ const useInputValidation = (options) => {
     setPasswordRepeatErrors,
     validateForm,
     handleChange,
+    checkErrors,
   }
 }
 

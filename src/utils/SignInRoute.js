@@ -1,12 +1,12 @@
 import React from 'react'
 import LoadingModal from '../Components/LoadingModal/LoadingModal'
-import { Route, useParams } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import HistoryPush from '../Components/HistoryPush'
 
 const SignInRoute = ({ Component, ...rest }) => {
   console.log('Rendering SignInrRoute component')
-  const { user, permissions } = useSelector((state) => state.fetch)
+  const { user, permissions } = useSelector((state) => state.authorization)
   const isRoleMatch =
     permissions.indexOf(user.role) > permissions.indexOf('guest') ? false : true
   return (

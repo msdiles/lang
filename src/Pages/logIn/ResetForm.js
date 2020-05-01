@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react'
-import { useParams, useHistory } from 'react-router-dom'
+import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import useInputValidation from '../../utils/useInputValidation'
 import { InputCheck } from '../../Components/InputCheck/InputCheck'
 import LoadingSpinner from '../../Components/LoadingSpinner/LoadingSpinner'
 import { PopMessage } from '../../Components/PopMessage/PopMessage'
-import LoadingModal from '../../Components/LoadingModal/LoadingModal'
 import ResetResult from './ResetResult'
 
 const ResetForm = ({ fetchStatusCheck, token, id }) => {
@@ -23,18 +22,13 @@ const ResetForm = ({ fetchStatusCheck, token, id }) => {
     passwordRepeatErrors,
     validateForm,
     handleChange,
+    checkErrors,
   } = useInputValidation()
-  
-  //TODO инкапсулировать проверка ошибок
+
   const handleSubmit = (e) => {
     e.preventDefault()
     validateForm('all')
-    if (
-      passwordErrors.filter((item) => item.value === false).length ===
-        passwordErrors.length &&
-      passwordRepeatErrors.filter((item) => item.value === false).length ===
-        passwordRepeatErrors.length
-    ) {
+    if (checkErrors(passwordErrors, passwordRepeatErrors)) {
       setFetchStatusReset({ isLoading: true, result: {}, error: false })
       fetch('/api/profile/reset/password', {
         method: 'POST',
@@ -77,7 +71,7 @@ const ResetForm = ({ fetchStatusCheck, token, id }) => {
       )}
       {!fetchStatusReset.result.success && (
         <React.Fragment>
-        <h3 className=''>Введите новый пароль.</h3>
+          <h3 className=''>Введите новый пароль.</h3>
           <InputCheck
             label='Пароль'
             idName='password'
@@ -113,11 +107,7 @@ const ResetForm = ({ fetchStatusCheck, token, id }) => {
         </React.Fragment>
       )}
 
-      <button
-        className='btn'
-        name='back'
-        onClick={() => history.push('/home')}
-      >
+      <button className='btn' name='back' onClick={() => history.push('/home')}>
         Отмена
       </button>
     </div>

@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
-import useInputValidation from '../../utils/useInputValidation'
-import { InputCheck } from '../../Components/InputCheck/InputCheck'
-import LoadingSpinner from '../../Components/LoadingSpinner/LoadingSpinner'
-import { PopMessage } from '../../Components/PopMessage/PopMessage'
 import LoadingModal from '../../Components/LoadingModal/LoadingModal'
 import ResetForm from './ResetForm'
 

@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
 export const ProfileSelect = () => {
-  const user = useSelector((state) => state.fetch.user)
+  const {user} = useSelector((state) => state.authorization)
   const history = useHistory()
   const options =
     typeof user.id === 'undefined'

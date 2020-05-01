@@ -9,10 +9,9 @@ import { MainLayout } from './MainLayout'
 import ResetRequest from '../logIn/ResetRequest'
 import PrivateRoute from '../../utils/PrivateRoute'
 import SignInRoute from '../../utils/SignInRoute'
-import ResetForm from '../logIn/ResetForm'
 import ResetCheckToken from '../logIn/ResetCheckToken'
+import Edit from '../edit/edit'
 
-//TODO redirect для всех путей-детей
 export const Main = () => {
   return (
     <Switch>
@@ -29,11 +28,12 @@ export const Main = () => {
         path='/edit'
         render={() => (
           <MainLayout>
-            <PrivateRoute Component={Profile} role='admin' />
+            <PrivateRoute Component={Edit} role='admin' />
           </MainLayout>
         )}
       />
       <Route
+        exact
         path='/profile'
         render={() => (
           <MainLayout>
@@ -42,6 +42,7 @@ export const Main = () => {
         )}
       />
       <Route
+        exact
         path='/logout'
         render={() => (
           <MainLayout>
@@ -49,8 +50,16 @@ export const Main = () => {
           </MainLayout>
         )}
       />
-      <Route path='/login' render={() => <SignInRoute Component={Login} />} />
-      <Route path='/signup' render={() => <SignInRoute Component={SignUp} />} />
+      <Route
+        exact
+        path='/login'
+        render={() => <SignInRoute Component={Login} />}
+      />
+      <Route
+        exact
+        path='/signup'
+        render={() => <SignInRoute Component={SignUp} />}
+      />
       <Route
         exact
         path='/reset'

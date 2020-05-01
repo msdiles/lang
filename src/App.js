@@ -11,7 +11,7 @@ import LoadingModal from './Components/LoadingModal/LoadingModal'
 const App = () => {
   console.log('Rendering App')
   const dispatch = useDispatch()
-  const { loading } = useSelector((state) => state.fetch.user)
+  const { loading } = useSelector((state) => state.authorization.user)
   useEffect(() => {
     if (!loading) {
       dispatch(getUser())

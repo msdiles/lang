@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 const Profile = () => {
   console.log('Rendering Profile component')
 
-  const user = useSelector((state) => state.fetch.user)
+  const { user } = useSelector((state) => state.authorization)
 
   if (user.loading)
     return (

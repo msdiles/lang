@@ -4,8 +4,7 @@ import { ProfileSelect } from './ProfileSelect'
 import { useSelector } from 'react-redux'
 
 const NavigationPanel = ({ className, listLinks, isNan }) => {
-  const user = useSelector((state) => state.fetch.user)
-  const permissions = useSelector((state) => state.fetch.permissions)
+  const { permissions, user } = useSelector((state) => state.authorization)
 
   const list = listLinks.map((link, index) =>
     permissions.indexOf(link.permission) <= permissions.indexOf(user.role) ? (

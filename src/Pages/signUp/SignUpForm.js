@@ -4,6 +4,7 @@ import { InputCheck } from '../../Components/InputCheck/InputCheck'
 import { PopMessage } from '../../Components/PopMessage/PopMessage'
 import useInputValidation from '../../utils/useInputValidation'
 import { useHistory } from 'react-router-dom'
+import LoadingSpinner from '../../Components/LoadingSpinner/LoadingSpinner'
 
 const SignUpForm = ({ changeFormPage = (f) => f }) => {
   const history = useHistory()
@@ -20,21 +21,21 @@ const SignUpForm = ({ changeFormPage = (f) => f }) => {
     passwordRepeatErrors,
     validateForm,
     handleChange,
+    checkErrors,
   } = useInputValidation()
 
   const handleSubmit = (e) => {
     setIsRegister('')
     e.preventDefault()
     validateForm('all')
+
     if (
-      loginErrors.filter((item) => item.value === false).length ===
-        loginErrors.length &&
-      emailErrors.filter((item) => item.value === false).length ===
-        emailErrors.length &&
-      passwordErrors.filter((item) => item.value === false).length ===
-        passwordErrors.length &&
-      passwordRepeatErrors.filter((item) => item.value === false).length ===
-        passwordRepeatErrors.length
+      checkErrors(
+        loginErrors,
+        emailErrors,
+        passwordErrors,
+        passwordRepeatErrors
+      )
     ) {
       setIsLoading(true)
       fetch('/api/profile/signup', {
@@ -71,7 +72,7 @@ const SignUpForm = ({ changeFormPage = (f) => f }) => {
       isRegister.error ? (
         <PopMessage message='Упс. Что-то пошло не так. Регистрация пользователя не удалась.' />
       ) : null}
-
+      {isLoading && <LoadingSpinner/>}
       <InputCheck
         label='Имя'
         idName='name'
