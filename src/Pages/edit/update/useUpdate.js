@@ -6,7 +6,6 @@ export const useUpdate = () => {
   const resultFromState = useSelector((state) => state.fetch.result)
   const dispatch = useDispatch()
   const isUpdated = resultFromState.updated ? resultFromState.updated : false
-  console.log('isUpdated',isUpdated)
 
   const handleSubmitUpdate = () => {
     const word = currentWordFromState.response

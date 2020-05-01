@@ -25,7 +25,6 @@ const SignUpForm = ({ changeFormPage = (f) => f }) => {
   const handleSubmit = (e) => {
     setIsRegister('')
     e.preventDefault()
-    console.log('submit')
     validateForm('all')
     if (
       loginErrors.filter((item) => item.value === false).length ===

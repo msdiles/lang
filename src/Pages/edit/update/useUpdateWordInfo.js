@@ -27,7 +27,6 @@ export const useUpdateWordInfo = ({ filteredResult = {} }) => {
       }
       setChecked(true)
     } catch (error) {
-      console.log(error)
       dispatchedWord = filteredResult
       setChecked(true)
     }

@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 
 const Profile = () => {
-  console.log('Rendering Profile')
+  console.log('Rendering Profile component')
 
   const user = useSelector((state) => state.fetch.user)
 

@@ -21,7 +21,6 @@ export const fetchUpdateRequest = () => ({
 })
 
 export const fetchUpdate = (word) => {
-  console.log(word)
   return (dispatch) => {
     dispatch(fetchUpdateRequest())
     return fetch('/api/word/update', {

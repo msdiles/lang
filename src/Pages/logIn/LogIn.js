@@ -8,7 +8,7 @@ import { fetchLogIn } from '../../actions/authorizationActions'
 import useInputValidation from '../../utils/useInputValidation'
 
 const Login = () => {
-  console.log('Rendering Login')
+  console.log('Rendering Login component')
 
   const { loading, error, errors } = useSelector((state) => state.fetch.user)
   const {

@@ -38,7 +38,6 @@ export const fetchLogIn = (user) => {
 
 //изменить catch на getFingerprint
 export const logIn = (user, fingerprint) => {
-  console.log(fingerprint)
   const { email, password } = user
   return (dispatch) => {
     dispatch(loginLoading())
@@ -100,7 +99,6 @@ export const fetchLogOut = () => {
 }
 
 export const logOut = (fingerprint) => {
-  console.log('logout')
   return (dispatch) => {
     const token = localStorage.getItem('refreshToken')
     if (token) {
@@ -158,7 +156,6 @@ export const refreshToken = (fingerprint, url, method, body) => {
           if (result.success === true) {
             localStorage.setItem('accessToken', result.accessToken)
             localStorage.setItem('refreshToken', result.refreshToken)
-            console.log('asdasdasdasd ')
             // dispatch(fetchRequest(url, method, body))
             dispatch(getUser())
           }
@@ -170,12 +167,9 @@ export const refreshToken = (fingerprint, url, method, body) => {
 
 //доступ к страницам с токеном
 export const getUser = () => {
-  console.log('getUSer')
   return (dispatch) => {
     const token = localStorage.getItem('accessToken')
     if (token) {
-      console.log('Rendering getUSer')
-
       dispatch(loginLoading())
       return fetch('/api/profile/refresh', {
         method: 'GET',

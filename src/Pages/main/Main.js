@@ -6,10 +6,13 @@ import Login from '../logIn/LogIn'
 import { LogOut } from '../logOut/LogOut'
 import Profile from '../profile/Profile'
 import { MainLayout } from './MainLayout'
-import Reset from '../logIn/Reset'
+import ResetRequest from '../logIn/ResetRequest'
 import PrivateRoute from '../../utils/PrivateRoute'
 import SignInRoute from '../../utils/SignInRoute'
+import ResetForm from '../logIn/ResetForm'
+import ResetCheckToken from '../logIn/ResetCheckToken'
 
+//TODO redirect для всех путей-детей
 export const Main = () => {
   return (
     <Switch>
@@ -48,7 +51,15 @@ export const Main = () => {
       />
       <Route path='/login' render={() => <SignInRoute Component={Login} />} />
       <Route path='/signup' render={() => <SignInRoute Component={SignUp} />} />
-      <Route path='/reset' render={() => <SignInRoute Component={Reset} />} />
+      <Route
+        exact
+        path='/reset'
+        render={() => <SignInRoute Component={ResetRequest} />}
+      />
+      <Route
+        path='/reset/:id/:token/'
+        render={() => <SignInRoute Component={ResetCheckToken} />}
+      />
       <Redirect to='/home' />
     </Switch>
   )

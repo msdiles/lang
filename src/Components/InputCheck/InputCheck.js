@@ -18,7 +18,6 @@ export const InputCheck = ({
   const [checked, setChecked] = useState(false)
 
   useEffect(() => {
-    console.log(errors)
     if (errors.length > 0) {
       setIsErrors('')
       setErrorMessage('')
